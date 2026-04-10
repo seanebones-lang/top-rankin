@@ -34,12 +34,11 @@ export default function Home() {
               Clean ingredients. Clear vibes. Built for calm.
             </div>
 
-            <h1 className="mt-5 sm:mt-6 font-heading text-4xl max-[360px]:text-[2.15rem] leading-[0.92] tracking-wide sm:text-6xl">
-              Feel the calm.
-              <br />
-              Keep the fire.
+            <h1 className="mt-5 sm:mt-6 font-heading text-4xl max-[360px]:text-[2.05rem] leading-[0.9] max-[360px]:leading-[0.94] tracking-wide sm:text-6xl [text-wrap:balance]">
+              <span className="block">Feel the calm.</span>
+              <span className="block">Keep the fire.</span>
             </h1>
-            <p className="mt-4 sm:mt-5 max-w-xl text-base sm:text-lg leading-7 sm:leading-8 text-muted-foreground">
+            <p className="mt-4 sm:mt-5 max-w-xl max-[360px]:max-w-[30ch] text-base sm:text-lg leading-7 sm:leading-8 text-muted-foreground [text-wrap:pretty]">
               Small-batch CBD blends inspired by Jamaican roots and crafted for
               everyday balance. Smooth flavors, steady energy, and a vibe that
               stays with you.
