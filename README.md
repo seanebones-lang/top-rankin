@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Top Rankin' Herb
+
+Modern Vercel-ready storefront/landing page for **Top Rankin' Herb** (Jamaican/Rastafarian-inspired theme) with:
+
+- **Square checkout links** for featured products
+- **Grok (xAI) chat** at `POST /api/chat`
+- **xAI Text-to-Speech** at `POST /api/tts` (bot speaks responses)
 
 ## Getting Started
 
-First, run the development server:
+Install deps and run the dev server:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` (or set in Vercel → Project → Settings → Environment Variables):
 
-## Learn More
+- **`XAI_API_KEY`**: required (server-only). Used by both `/api/chat` and `/api/tts`.
+- **`NEXT_PUBLIC_SITE_URL`**: optional (e.g. `https://toprankinherb.com`). Used for metadata base URL.
 
-To learn more about Next.js, take a look at the following resources:
+Security: if you ever paste an API key into chat/logs, treat it as compromised and **revoke it** in the xAI console.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Editing products (Square links)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Update featured products in:
+
+- `src/content/products.ts`
+
+Replace each `squareCheckoutUrl: "#"` with your real Square checkout link.
+
+## Build
+
+```bash
+pnpm build
+pnpm start
+```
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Import this repo into Vercel.
+2. Set `XAI_API_KEY` (and optionally `NEXT_PUBLIC_SITE_URL`) in Vercel env vars.
+3. Deploy.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Notes:
+- The chat widget is mounted globally in `src/app/layout.tsx` via `src/components/ChatWidget.tsx`.
+- SEO endpoints: `/sitemap.xml`, `/robots.txt`, and `/opengraph-image`.

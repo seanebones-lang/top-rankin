@@ -8,8 +8,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-heading);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,24 +48,25 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
+  /* Top Rankin' Herb palette: cream base + rasta accents */
+  --background: oklch(0.985 0.012 92);
+  --foreground: oklch(0.17 0.02 95);
+  --card: oklch(0.995 0.01 92);
+  --card-foreground: oklch(0.17 0.02 95);
+  --popover: oklch(0.995 0.01 92);
+  --popover-foreground: oklch(0.17 0.02 95);
+  --primary: oklch(0.44 0.17 144); /* deep herb green */
+  --primary-foreground: oklch(0.98 0.01 92);
+  --secondary: oklch(0.92 0.04 92);
+  --secondary-foreground: oklch(0.23 0.02 95);
+  --muted: oklch(0.94 0.03 92);
+  --muted-foreground: oklch(0.42 0.03 95);
+  --accent: oklch(0.82 0.14 84); /* gold */
+  --accent-foreground: oklch(0.22 0.02 95);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --border: oklch(0.9 0.02 92);
+  --input: oklch(0.9 0.02 92);
+  --ring: oklch(0.44 0.17 144);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -84,24 +84,24 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  --background: oklch(0.17 0.02 144);
+  --foreground: oklch(0.97 0.01 92);
+  --card: oklch(0.2 0.02 144);
+  --card-foreground: oklch(0.97 0.01 92);
+  --popover: oklch(0.2 0.02 144);
+  --popover-foreground: oklch(0.97 0.01 92);
+  --primary: oklch(0.82 0.14 84);
+  --primary-foreground: oklch(0.18 0.02 144);
+  --secondary: oklch(0.24 0.02 144);
+  --secondary-foreground: oklch(0.97 0.01 92);
+  --muted: oklch(0.24 0.02 144);
+  --muted-foreground: oklch(0.78 0.02 92);
+  --accent: oklch(0.62 0.23 28); /* warm red */
+  --accent-foreground: oklch(0.97 0.01 92);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --ring: oklch(0.82 0.14 84);
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -127,4 +127,22 @@
   html {
     @apply font-sans;
   }
+}
+
+body {
+  background-image:
+    radial-gradient(1200px 700px at 8% 10%, oklch(0.82 0.14 84 / 18%), transparent 55%),
+    radial-gradient(900px 600px at 80% 20%, oklch(0.62 0.23 28 / 14%), transparent 60%),
+    radial-gradient(1000px 650px at 55% 95%, oklch(0.44 0.17 144 / 16%), transparent 55%);
+  background-attachment: fixed;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
 }
