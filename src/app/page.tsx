@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowRight, ShieldCheck, Sparkles, Truck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { EmailSignup } from "@/components/EmailSignup";
 import { featuredProducts } from "@/content/products";
 
 export default function Home() {
@@ -210,6 +211,45 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="list" className="mt-20">
+          <div className="overflow-hidden rounded-[2.25rem] border border-border/70 bg-card/70 shadow-sm">
+            <div className="grid gap-8 p-8 sm:p-10 md:grid-cols-2 md:items-center">
+              <div>
+                <h2 className="font-heading text-4xl tracking-wide">
+                  Get early access
+                </h2>
+                <p className="mt-2 text-muted-foreground">
+                  Drops, deals, and new blends—straight to your inbox. No spam,
+                  just vibes.
+                </p>
+                <EmailSignup />
+                <p className="mt-3 text-xs text-muted-foreground">
+                  By joining, you agree to receive emails from Top Rankin&apos;
+                  Herb. Unsubscribe anytime.
+                </p>
+              </div>
+              <div className="relative">
+                <div className="absolute -inset-8 rounded-[2.25rem] bg-gradient-to-tr from-primary/25 via-accent/15 to-transparent blur-2xl" />
+                <div className="relative rounded-[2.25rem] border border-border/70 bg-background/40 p-6">
+                  <div className="font-heading text-3xl tracking-wide">
+                    What you&apos;ll get
+                  </div>
+                  <ul className="mt-4 space-y-3 text-sm text-muted-foreground">
+                    <li>• First look at limited runs</li>
+                    <li>• Subscriber-only bundles</li>
+                    <li>• Shipping updates + restocks</li>
+                  </ul>
+                  <Button className="mt-6 w-full" asChild>
+                    <a href="#drops">
+                      Shop featured drops <ArrowRight className="size-4" />
+                    </a>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <footer className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-border/70 py-10 sm:flex-row sm:items-center">
           <div>
             <div className="font-heading text-2xl tracking-wide">
@@ -225,6 +265,9 @@ export default function Home() {
             </a>
             <a className="hover:text-foreground" href="/terms">
               Terms
+            </a>
+            <a className="hover:text-foreground" href="#list">
+              Email list
             </a>
             <a
               className="hover:text-foreground"
