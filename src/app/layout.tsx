@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Alegreya, Bebas_Neue } from "next/font/google";
 import "./globals.css";
 import { ChatWidget } from "@/components/ChatWidget";
+import { MobileStickyCta } from "@/components/MobileStickyCta";
 
 const bodyFont = Alegreya({
   variable: "--font-sans",
@@ -49,6 +50,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {children}
+        <MobileStickyCta />
         <ChatWidget />
         <Analytics />
         <SpeedInsights />

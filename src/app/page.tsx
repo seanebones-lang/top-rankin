@@ -2,16 +2,14 @@ import Image from "next/image";
 import {
   ArrowRight,
   BadgeCheck,
-  ExternalLink,
   Leaf,
   ShieldCheck,
-  Sparkles,
   Truck,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { EmailSignup } from "@/components/EmailSignup";
-import { TrackedLink } from "@/components/TrackedLink";
+import { FeaturedProducts } from "@/components/FeaturedProducts";
 import { featuredProducts } from "@/content/products";
 
 export default function Home() {
@@ -20,8 +18,15 @@ export default function Home() {
       <header className="sticky top-0 z-40 border-b border-border/70 bg-background/70 backdrop-blur">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
           <div className="flex items-center gap-3">
-            <div className="grid size-10 place-items-center rounded-2xl bg-primary text-primary-foreground shadow-sm">
-              <Sparkles className="size-5" />
+            <div className="relative size-10 overflow-hidden rounded-2xl border border-border/70 bg-card/70 shadow-sm">
+              <Image
+                src="/images/logo.jpg"
+                alt="Top Rankin' Herb logo"
+                fill
+                sizes="40px"
+                className="object-cover"
+                priority
+              />
             </div>
             <div className="leading-tight">
               <div className="font-heading text-2xl tracking-wide">
@@ -194,7 +199,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="drops" className="mt-20">
+        <section id="drops" className="mt-20" style={{ scrollMarginTop: 96 }}>
           <div className="flex items-end justify-between gap-6">
             <div>
               <h2 className="font-heading text-4xl tracking-wide">
@@ -210,51 +215,61 @@ export default function Home() {
             </Button>
           </div>
 
-          <div className="mt-8 grid gap-6 md:grid-cols-3">
-            {featuredProducts.map((p) => (
-              <article
-                key={p.name}
-                className="group overflow-hidden rounded-[1.75rem] border border-border/70 bg-card/70 shadow-sm transition-transform duration-200 hover:-translate-y-0.5"
-              >
-                <div className="h-44 bg-gradient-to-br from-primary/15 via-accent/10 to-transparent" />
-                <div className="p-6">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="font-heading text-2xl tracking-wide">
-                        {p.name}
-                      </h3>
-                      <p className="mt-1 text-sm text-muted-foreground">
-                        {p.note}
-                      </p>
-                    </div>
-                    <div className="rounded-full border border-border/70 bg-background/60 px-3 py-1 text-sm font-medium">
-                      {p.priceLabel}
-                    </div>
-                  </div>
-                  <div className="mt-5 flex gap-3">
-                    <Button className="flex-1" asChild>
-                      <TrackedLink
-                        href={p.squareCheckoutUrl}
-                        aria-label={`Buy ${p.name}`}
-                        eventName="SquareBuyClick"
-                        eventData={{ slug: p.slug }}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        Buy (Square) <ExternalLink className="size-4" />
-                      </TrackedLink>
-                    </Button>
-                    <Button className="flex-1" variant="secondary" asChild>
-                      <a href="#list">Get updates</a>
-                    </Button>
-                  </div>
-                </div>
-              </article>
-            ))}
+          <FeaturedProducts products={featuredProducts} />
+        </section>
+
+        <section id="proof" className="mt-20" style={{ scrollMarginTop: 96 }}>
+          <div className="rounded-[2.25rem] border border-border/70 bg-card/70 p-8 shadow-sm sm:p-10">
+            <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h2 className="font-heading text-4xl tracking-wide">
+                  Loved by the calm seekers
+                </h2>
+                <p className="mt-2 max-w-2xl text-muted-foreground">
+                  Drop in real testimonials when you’re ready. For now, these
+                  are placeholders to show the layout.
+                </p>
+              </div>
+              <Button variant="secondary" asChild>
+                <a href="#list">Get drops first</a>
+              </Button>
+            </div>
+
+            <div className="mt-8 grid gap-6 md:grid-cols-3">
+              {[
+                {
+                  quote:
+                    "“My evenings feel smoother. Not sleepy—just settled.”",
+                  name: "A. R.",
+                },
+                {
+                  quote:
+                    "“Fast checkout and the balm hits after workouts.”",
+                  name: "J. K.",
+                },
+                {
+                  quote:
+                    "“The tincture fits my routine. Easy, consistent, clean.”",
+                  name: "M. S.",
+                },
+              ].map((t) => (
+                <figure
+                  key={t.quote}
+                  className="rounded-[1.75rem] border border-border/70 bg-background/40 p-6"
+                >
+                  <blockquote className="text-sm leading-6 text-foreground/90">
+                    {t.quote}
+                  </blockquote>
+                  <figcaption className="mt-4 text-xs text-muted-foreground">
+                    — {t.name}
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
           </div>
         </section>
 
-        <section id="faq" className="mt-20">
+        <section id="faq" className="mt-20" style={{ scrollMarginTop: 96 }}>
           <div className="rounded-[2.25rem] border border-border/70 bg-card/70 p-8 shadow-sm sm:p-10">
             <h2 className="font-heading text-4xl tracking-wide">FAQ</h2>
             <div className="mt-6 grid gap-6 md:grid-cols-2">
@@ -280,7 +295,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="list" className="mt-20">
+        <section id="list" className="mt-20" style={{ scrollMarginTop: 96 }}>
           <div className="overflow-hidden rounded-[2.25rem] border border-border/70 bg-card/70 shadow-sm">
             <div className="grid gap-8 p-8 sm:p-10 md:grid-cols-2 md:items-center">
               <div>
