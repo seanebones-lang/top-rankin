@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 import { track } from "@vercel/analytics";
 
 import { Button } from "@/components/ui/button";
@@ -57,17 +57,28 @@ export function MobileStickyCta() {
                 : "Tap to see featured drops"}
             </div>
           </div>
-          <Button
-            onClick={() => {
-              track(ctaEvent);
-              document.querySelector(ctaTarget)?.scrollIntoView({
-                behavior: "smooth",
-                block: "start",
-              });
-            }}
-          >
-            {ctaLabel} <ArrowRight className="size-4" />
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="secondary"
+              onClick={() => {
+                track("StickyChatClick");
+                window.dispatchEvent(new Event("trh-open-chat"));
+              }}
+            >
+              Chat <MessageCircle className="size-4" />
+            </Button>
+            <Button
+              onClick={() => {
+                track(ctaEvent);
+                document.querySelector(ctaTarget)?.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }}
+            >
+              {ctaLabel} <ArrowRight className="size-4" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

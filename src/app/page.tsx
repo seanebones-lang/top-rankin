@@ -9,9 +9,11 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { EmailSignup } from "@/components/EmailSignup";
+import { FaqAccordion } from "@/components/FaqAccordion";
 import { FeaturedProducts } from "@/components/FeaturedProducts";
 import { HeaderNav } from "@/components/HeaderNav";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
+import { UrgencyBanner } from "@/components/UrgencyBanner";
 import { featuredProducts } from "@/content/products";
 
 export default function Home() {
@@ -20,8 +22,10 @@ export default function Home() {
       <HeaderNav />
 
       <main id="main" className="mx-auto max-w-6xl px-5 pb-24 pt-14 sm:pt-20">
+        <UrgencyBanner />
+
         <section
-          className="grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr]"
+          className="mt-7 grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr]"
           style={{ scrollMarginTop: 96 }}
         >
           <div>
@@ -207,26 +211,7 @@ export default function Home() {
         <section id="faq" className="mt-20" style={{ scrollMarginTop: 96 }}>
           <div className="rounded-[2.25rem] border border-border/70 bg-card/70 p-8 shadow-sm sm:p-10">
             <h2 className="font-heading text-4xl tracking-wide">FAQ</h2>
-            <div className="mt-6 grid gap-6 md:grid-cols-2">
-              <div>
-                <h3 className="text-base font-semibold">
-                  Is this legal / will it get me high?
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  We’re focused on CBD products. Effects vary by person. We
-                  don’t make medical claims—check local laws and consult a
-                  professional if you’re unsure.
-                </p>
-              </div>
-              <div>
-                <h3 className="text-base font-semibold">Shipping & returns</h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  Checkout is handled securely via Square. Shipping timelines
-                  and return policies will be shown at checkout and on your
-                  receipt.
-                </p>
-              </div>
-            </div>
+            <FaqAccordion />
           </div>
         </section>
 

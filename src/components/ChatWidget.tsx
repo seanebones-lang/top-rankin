@@ -73,6 +73,12 @@ export function ChatWidget() {
     track("ChatOpen");
   }, [open]);
 
+  React.useEffect(() => {
+    const openFromExternal = () => setOpen(true);
+    window.addEventListener("trh-open-chat", openFromExternal);
+    return () => window.removeEventListener("trh-open-chat", openFromExternal);
+  }, []);
+
   async function speak(text: string) {
     const res = await fetch("/api/tts", {
       method: "POST",
