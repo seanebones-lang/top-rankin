@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { EmailSignup } from "@/components/EmailSignup";
 import { FeaturedProducts } from "@/components/FeaturedProducts";
 import { HeaderNav } from "@/components/HeaderNav";
+import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { featuredProducts } from "@/content/products";
 
 export default function Home() {
@@ -199,38 +200,7 @@ export default function Home() {
                 <a href="#list">Get drops first</a>
               </Button>
             </div>
-
-            <div className="mt-8 grid gap-6 md:grid-cols-3">
-              {[
-                {
-                  quote:
-                    "“My evenings feel smoother. Not sleepy—just settled.”",
-                  name: "A. R.",
-                },
-                {
-                  quote:
-                    "“Fast checkout and the balm hits after workouts.”",
-                  name: "J. K.",
-                },
-                {
-                  quote:
-                    "“The tincture fits my routine. Easy, consistent, clean.”",
-                  name: "M. S.",
-                },
-              ].map((t) => (
-                <figure
-                  key={t.quote}
-                  className="rounded-[1.75rem] border border-border/70 bg-background/40 p-6"
-                >
-                  <blockquote className="text-sm leading-6 text-foreground/90">
-                    {t.quote}
-                  </blockquote>
-                  <figcaption className="mt-4 text-xs text-muted-foreground">
-                    — {t.name}
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
+            <TestimonialsCarousel />
           </div>
         </section>
 

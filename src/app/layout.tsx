@@ -3,7 +3,9 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Alegreya, Bebas_Neue } from "next/font/google";
 import "./globals.css";
+import { BackToTopButton } from "@/components/BackToTopButton";
 import { ChatWidget } from "@/components/ChatWidget";
+import { DesktopStickyCta } from "@/components/DesktopStickyCta";
 import { MobileStickyCta } from "@/components/MobileStickyCta";
 
 const bodyFont = Alegreya({
@@ -50,7 +52,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         {children}
+        <DesktopStickyCta />
         <MobileStickyCta />
+        <BackToTopButton />
         <ChatWidget />
         <Analytics />
         <SpeedInsights />
