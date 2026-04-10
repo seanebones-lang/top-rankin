@@ -226,8 +226,19 @@ export default function Home() {
             <a className="hover:text-foreground" href="/terms">
               Terms
             </a>
-            <a className="hover:text-foreground" href="mailto:hello@toprankinherb.com">
-              Contact
+            <a
+              className="hover:text-foreground"
+              href="https://www.facebook.com/p/Top-Rankin-Herbs-N-Oils-100047360516163/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Facebook
+            </a>
+            <a
+              className="hover:text-foreground"
+              href="mailto:toprankin.herbsnoils@gmail.com"
+            >
+              toprankin.herbsnoils@gmail.com
             </a>
           </div>
         </footer>
