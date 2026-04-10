@@ -1,0 +1,92 @@
+"use client";
+
+import * as React from "react";
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+import { track } from "@vercel/analytics";
+
+import { Button } from "@/components/ui/button";
+
+export function HeaderNav() {
+  const [afterDrops, setAfterDrops] = React.useState(false);
+
+  React.useEffect(() => {
+    const el = document.getElementById("drops");
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        // When the drops section is visible, switch CTA to the email list.
+        setAfterDrops(entry.isIntersecting);
+      },
+      {
+        root: null,
+        threshold: 0.25,
+        // Sticky header height
+        rootMargin: "-96px 0px 0px 0px",
+      },
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const primaryHref = afterDrops ? "#list" : "#drops";
+  const primaryLabel = afterDrops ? "Join list" : "Shop now";
+
+  return (
+    <header className="sticky top-0 z-40 border-b border-border/70 bg-background/70 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+        <a
+          href="#"
+          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 rounded-2xl"
+          onClick={() => track("HeaderBrandClick")}
+          aria-label="Top Rankin' Herb home"
+        >
+          <div className="relative size-10 overflow-hidden rounded-2xl border border-border/70 bg-card/70 shadow-sm">
+            <Image
+              src="/images/logo.jpg"
+              alt="Top Rankin' Herb logo"
+              fill
+              sizes="40px"
+              className="object-cover"
+              priority
+            />
+          </div>
+          <div className="leading-tight">
+            <div className="font-heading text-2xl tracking-wide">
+              Top Rankin&apos; Herb
+            </div>
+            <div className="text-sm text-muted-foreground">
+              CBD with island soul
+            </div>
+          </div>
+        </a>
+
+        <div className="hidden items-center gap-2 sm:flex">
+          <Button variant="ghost" asChild>
+            <a href="#drops" onClick={() => track("HeaderNavClick", { to: "drops" })}>
+              Featured drops
+            </a>
+          </Button>
+          <Button variant="ghost" asChild>
+            <a href="#list" onClick={() => track("HeaderNavClick", { to: "list" })}>
+              Email list
+            </a>
+          </Button>
+          <Button asChild>
+            <a
+              href={primaryHref}
+              onClick={() =>
+                track("HeaderPrimaryClick", { to: afterDrops ? "list" : "drops" })
+              }
+            >
+              {primaryLabel} <ArrowRight className="size-4" />
+            </a>
+          </Button>
+        </div>
+      </div>
+    </header>
+  );
+}
+

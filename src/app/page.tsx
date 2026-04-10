@@ -10,48 +10,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { EmailSignup } from "@/components/EmailSignup";
 import { FeaturedProducts } from "@/components/FeaturedProducts";
+import { HeaderNav } from "@/components/HeaderNav";
 import { featuredProducts } from "@/content/products";
 
 export default function Home() {
   return (
     <div className="min-h-[calc(100vh-1px)]">
-      <header className="sticky top-0 z-40 border-b border-border/70 bg-background/70 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
-          <div className="flex items-center gap-3">
-            <div className="relative size-10 overflow-hidden rounded-2xl border border-border/70 bg-card/70 shadow-sm">
-              <Image
-                src="/images/logo.jpg"
-                alt="Top Rankin' Herb logo"
-                fill
-                sizes="40px"
-                className="object-cover"
-                priority
-              />
-            </div>
-            <div className="leading-tight">
-              <div className="font-heading text-2xl tracking-wide">
-                Top Rankin&apos; Herb
-              </div>
-              <div className="text-sm text-muted-foreground">
-                CBD with island soul
-              </div>
-            </div>
-          </div>
-          <div className="hidden items-center gap-2 sm:flex">
-            <Button variant="ghost" asChild>
-              <a href="#drops">Featured drops</a>
-            </Button>
-            <Button variant="ghost" asChild>
-              <a href="#list">Email list</a>
-            </Button>
-            <Button asChild>
-              <a href="#drops">
-                Shop now <ArrowRight className="size-4" />
-              </a>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <HeaderNav />
 
       <main className="mx-auto max-w-6xl px-5 pb-24 pt-14 sm:pt-20">
         <section
