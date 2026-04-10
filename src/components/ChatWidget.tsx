@@ -74,6 +74,12 @@ export function ChatWidget() {
   }, [open]);
 
   React.useEffect(() => {
+    window.dispatchEvent(
+      new CustomEvent("trh-chat-open-state", { detail: { open } }),
+    );
+  }, [open]);
+
+  React.useEffect(() => {
     const openFromExternal = () => setOpen(true);
     window.addEventListener("trh-open-chat", openFromExternal);
     return () => window.removeEventListener("trh-open-chat", openFromExternal);

@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 export function MobileStickyCta() {
   const [shown, setShown] = React.useState(false);
   const [afterDrops, setAfterDrops] = React.useState(false);
+  const [chatOpen, setChatOpen] = React.useState(false);
 
   React.useEffect(() => {
     const onScroll = () => {
@@ -34,6 +35,19 @@ export function MobileStickyCta() {
     return () => io.disconnect();
   }, []);
 
+  React.useEffect(() => {
+    const onChatState = (event: Event) => {
+      const custom = event as CustomEvent<{ open?: boolean }>;
+      setChatOpen(Boolean(custom.detail?.open));
+    };
+    window.addEventListener("trh-chat-open-state", onChatState as EventListener);
+    return () =>
+      window.removeEventListener(
+        "trh-chat-open-state",
+        onChatState as EventListener,
+      );
+  }, []);
+
   const ctaLabel = afterDrops ? "Join list" : "Shop";
   const ctaTarget = afterDrops ? "#list" : "#drops";
   const ctaEvent = afterDrops ? "StickyJoinClick" : "StickyShopClick";
@@ -42,7 +56,7 @@ export function MobileStickyCta() {
     <div
       className={cn(
         "fixed inset-x-0 bottom-0 z-40 p-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] sm:hidden transition-transform duration-200",
-        shown ? "translate-y-0" : "translate-y-full",
+        shown && !chatOpen ? "translate-y-0" : "translate-y-full",
       )}
     >
       <div className="mx-auto max-w-6xl rounded-2xl border border-border/70 bg-background/80 shadow-lg backdrop-blur">
