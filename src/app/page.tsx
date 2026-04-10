@@ -3,6 +3,7 @@ import { ArrowRight, ShieldCheck, Sparkles, Truck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { EmailSignup } from "@/components/EmailSignup";
+import { TrackedLink } from "@/components/TrackedLink";
 import { featuredProducts } from "@/content/products";
 
 export default function Home() {
@@ -171,9 +172,14 @@ export default function Home() {
                   </div>
                   <div className="mt-5 flex gap-3">
                     <Button className="flex-1" asChild>
-                      <a href={p.squareCheckoutUrl} aria-label={`Buy ${p.name}`}>
+                      <TrackedLink
+                        href={p.squareCheckoutUrl}
+                        aria-label={`Buy ${p.name}`}
+                        eventName="SquareBuyClick"
+                        eventData={{ slug: p.slug }}
+                      >
                         Buy (Square) <ArrowRight className="size-4" />
-                      </a>
+                      </TrackedLink>
                     </Button>
                     <Button className="flex-1" variant="secondary" asChild>
                       <a href="#faq">Details</a>

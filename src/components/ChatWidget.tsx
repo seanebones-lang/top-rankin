@@ -4,6 +4,7 @@ import * as React from "react";
 import { MessageCircle, Volume2, VolumeX } from "lucide-react";
 import { useChat } from "@ai-sdk/react";
 import { TextStreamChatTransport } from "ai";
+import { track } from "@vercel/analytics";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,6 +34,11 @@ export function ChatWidget() {
       await speak(text);
     },
   });
+
+  React.useEffect(() => {
+    if (!open) return;
+    track("ChatOpen");
+  }, [open]);
 
   async function speak(text: string) {
     const res = await fetch("/api/tts", {
@@ -83,7 +89,13 @@ export function ChatWidget() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setVoiceEnabled((v) => !v)}
+                onClick={() => {
+                  setVoiceEnabled((v) => {
+                    const next = !v;
+                    track(next ? "ChatVoiceOn" : "ChatVoiceOff");
+                    return next;
+                  });
+                }}
                 aria-label={voiceEnabled ? "Disable voice" : "Enable voice"}
               >
                 {voiceEnabled ? (
@@ -94,7 +106,11 @@ export function ChatWidget() {
               </Button>
               <select
                 value={voiceId}
-                onChange={(e) => setVoiceId(e.target.value as VoiceId)}
+                onChange={(e) => {
+                  const next = e.target.value as VoiceId;
+                  setVoiceId(next);
+                  track("ChatVoiceSelect", { voiceId: next });
+                }}
                 className="h-9 rounded-md border border-border/70 bg-background/70 px-2 text-xs"
                 aria-label="Voice"
               >
@@ -104,7 +120,14 @@ export function ChatWidget() {
                 <option value="rex">Rex (clear)</option>
                 <option value="leo">Leo (strong)</option>
               </select>
-              <Button variant="secondary" size="sm" onClick={() => setOpen(false)}>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => {
+                  setOpen(false);
+                  track("ChatClose");
+                }}
+              >
                 Close
               </Button>
             </div>
@@ -147,6 +170,7 @@ export function ChatWidget() {
               e.preventDefault();
               if (status !== "ready") return;
               if (!input.trim()) return;
+              track("ChatSend", { chars: String(input.trim().length) });
               sendMessage({ text: input });
               setInput("");
             }}
