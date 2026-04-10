@@ -41,7 +41,7 @@ export function MobileStickyCta() {
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-0 z-40 p-3 sm:hidden transition-transform duration-200",
+        "fixed inset-x-0 bottom-0 z-40 p-3 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] sm:hidden transition-transform duration-200",
         shown ? "translate-y-0" : "translate-y-full",
       )}
     >
@@ -57,7 +57,7 @@ export function MobileStickyCta() {
                 : "Tap to see featured drops"}
             </div>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap justify-end items-center gap-2">
             <Button
               variant="secondary"
               onClick={() => {

@@ -22,7 +22,7 @@ export function BackToTopButton() {
   return (
     <div
       className={cn(
-        "fixed bottom-5 left-5 z-40 transition-all duration-200",
+        "fixed bottom-5 left-5 z-40 transition-all duration-200 hidden sm:block",
         visible
           ? "translate-y-0 opacity-100 pointer-events-auto"
           : "translate-y-3 opacity-0 pointer-events-none",

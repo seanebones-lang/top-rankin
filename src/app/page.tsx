@@ -21,7 +21,7 @@ export default function Home() {
     <div className="min-h-[calc(100vh-1px)]">
       <HeaderNav />
 
-      <main id="main" className="mx-auto max-w-6xl px-5 pb-24 pt-14 sm:pt-20">
+      <main id="main" className="mx-auto max-w-6xl px-5 pb-36 pt-14 sm:pb-24 sm:pt-20">
         <UrgencyBanner />
 
         <section
