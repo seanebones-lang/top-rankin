@@ -21,11 +21,11 @@ export default function Home() {
     <div className="min-h-[calc(100vh-1px)]">
       <HeaderNav />
 
-      <main id="main" className="mx-auto max-w-6xl px-5 pb-36 pt-14 sm:pb-24 sm:pt-20">
+      <main id="main" className="mx-auto max-w-6xl px-4 sm:px-5 pb-36 pt-12 sm:pb-24 sm:pt-20">
         <UrgencyBanner />
 
         <section
-          className="mt-7 grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr]"
+          className="mt-6 sm:mt-7 grid items-center gap-8 sm:gap-10 md:grid-cols-[1.2fr_0.8fr]"
           style={{ scrollMarginTop: 96 }}
         >
           <div>
@@ -34,12 +34,12 @@ export default function Home() {
               Clean ingredients. Clear vibes. Built for calm.
             </div>
 
-            <h1 className="mt-6 font-heading text-5xl leading-[0.92] tracking-wide sm:text-6xl">
+            <h1 className="mt-5 sm:mt-6 font-heading text-4xl max-[360px]:text-[2.15rem] leading-[0.92] tracking-wide sm:text-6xl">
               Feel the calm.
               <br />
               Keep the fire.
             </h1>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-muted-foreground">
+            <p className="mt-4 sm:mt-5 max-w-xl text-base sm:text-lg leading-7 sm:leading-8 text-muted-foreground">
               Small-batch CBD blends inspired by Jamaican roots and crafted for
               everyday balance. Smooth flavors, steady energy, and a vibe that
               stays with you.
@@ -56,7 +56,7 @@ export default function Home() {
               </Button>
             </div>
 
-            <dl className="mt-10 grid gap-4 sm:grid-cols-3">
+            <dl className="mt-8 sm:mt-10 grid gap-3 sm:gap-4 sm:grid-cols-3">
               <div className="rounded-2xl border border-border/70 bg-card/70 p-4 shadow-sm">
                 <dt className="text-sm font-medium">Fast checkout</dt>
                 <dd className="mt-1 text-sm text-muted-foreground">
@@ -81,7 +81,7 @@ export default function Home() {
           <div className="relative">
             <div className="absolute -inset-6 rounded-[2.25rem] bg-gradient-to-tr from-primary/20 via-accent/15 to-transparent blur-2xl" />
             <div className="relative overflow-hidden rounded-[2.25rem] border border-border/70 bg-card/80 shadow-sm">
-              <div className="p-6">
+              <div className="p-5 sm:p-6">
                 <div className="flex items-center justify-between">
                   <div className="font-heading text-2xl tracking-wide">
                     Featured blend
@@ -122,9 +122,9 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="why" className="mt-14" style={{ scrollMarginTop: 96 }}>
+        <section id="why" className="mt-12 sm:mt-14" style={{ scrollMarginTop: 96 }}>
           <div className="grid gap-6 md:grid-cols-3">
-            <div className="rounded-[1.75rem] border border-border/70 bg-card/70 p-6 shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
+            <div className="rounded-[1.75rem] border border-border/70 bg-card/70 p-5 sm:p-6 shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
               <div className="flex items-center gap-3">
                 <div className="grid size-10 place-items-center rounded-2xl bg-primary/10 text-primary">
                   <Leaf className="size-5" />
@@ -138,7 +138,7 @@ export default function Home() {
                 calm focus and easy nights.
               </p>
             </div>
-            <div className="rounded-[1.75rem] border border-border/70 bg-card/70 p-6 shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
+            <div className="rounded-[1.75rem] border border-border/70 bg-card/70 p-5 sm:p-6 shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
               <div className="flex items-center gap-3">
                 <div className="grid size-10 place-items-center rounded-2xl bg-accent/20 text-accent-foreground">
                   <BadgeCheck className="size-5" />
@@ -152,7 +152,7 @@ export default function Home() {
                 when your product images land.
               </p>
             </div>
-            <div className="rounded-[1.75rem] border border-border/70 bg-card/70 p-6 shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
+            <div className="rounded-[1.75rem] border border-border/70 bg-card/70 p-5 sm:p-6 shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
               <div className="flex items-center gap-3">
                 <div className="grid size-10 place-items-center rounded-2xl bg-background/60 text-primary">
                   <Truck className="size-5" />
@@ -169,10 +169,10 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="drops" className="mt-20" style={{ scrollMarginTop: 96 }}>
+        <section id="drops" className="mt-16 sm:mt-20" style={{ scrollMarginTop: 96 }}>
           <div className="flex items-end justify-between gap-6">
             <div>
-              <h2 className="font-heading text-4xl tracking-wide">
+              <h2 className="font-heading text-3xl sm:text-4xl tracking-wide">
                 Featured drops
               </h2>
               <p className="mt-2 max-w-2xl text-muted-foreground">
@@ -188,11 +188,11 @@ export default function Home() {
           <FeaturedProducts products={featuredProducts} />
         </section>
 
-        <section id="proof" className="mt-20" style={{ scrollMarginTop: 96 }}>
-          <div className="rounded-[2.25rem] border border-border/70 bg-card/70 p-8 shadow-sm sm:p-10">
+        <section id="proof" className="mt-16 sm:mt-20" style={{ scrollMarginTop: 96 }}>
+          <div className="rounded-[2.25rem] border border-border/70 bg-card/70 p-6 sm:p-10 shadow-sm">
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div>
-                <h2 className="font-heading text-4xl tracking-wide">
+                <h2 className="font-heading text-3xl sm:text-4xl tracking-wide">
                   Loved by the calm seekers
                 </h2>
                 <p className="mt-2 max-w-2xl text-muted-foreground">
@@ -208,18 +208,18 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="faq" className="mt-20" style={{ scrollMarginTop: 96 }}>
-          <div className="rounded-[2.25rem] border border-border/70 bg-card/70 p-8 shadow-sm sm:p-10">
-            <h2 className="font-heading text-4xl tracking-wide">FAQ</h2>
+        <section id="faq" className="mt-16 sm:mt-20" style={{ scrollMarginTop: 96 }}>
+          <div className="rounded-[2.25rem] border border-border/70 bg-card/70 p-6 sm:p-10 shadow-sm">
+            <h2 className="font-heading text-3xl sm:text-4xl tracking-wide">FAQ</h2>
             <FaqAccordion />
           </div>
         </section>
 
-        <section id="list" className="mt-20" style={{ scrollMarginTop: 96 }}>
+        <section id="list" className="mt-16 sm:mt-20" style={{ scrollMarginTop: 96 }}>
           <div className="overflow-hidden rounded-[2.25rem] border border-border/70 bg-card/70 shadow-sm">
-            <div className="grid gap-8 p-8 sm:p-10 md:grid-cols-2 md:items-center">
+            <div className="grid gap-6 sm:gap-8 p-6 sm:p-10 md:grid-cols-2 md:items-center">
               <div>
-                <h2 className="font-heading text-4xl tracking-wide">
+                <h2 className="font-heading text-3xl sm:text-4xl tracking-wide">
                   Get early access
                 </h2>
                 <p className="mt-2 text-muted-foreground">

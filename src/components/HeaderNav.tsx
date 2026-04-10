@@ -42,28 +42,28 @@ export function HeaderNav() {
       >
         Skip to content
       </a>
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-5 sm:py-4">
         <a
           href="#"
-          className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 rounded-2xl"
+          className="flex items-center gap-2 sm:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 rounded-2xl"
           onClick={() => track("HeaderBrandClick")}
           aria-label="Top Rankin' Herb home"
         >
-          <div className="relative size-10 overflow-hidden rounded-2xl border border-border/70 bg-card/70 shadow-sm">
+          <div className="relative size-9 sm:size-10 overflow-hidden rounded-2xl border border-border/70 bg-card/70 shadow-sm">
             <Image
               src="/images/logo.jpg"
               alt="Top Rankin' Herb logo"
               fill
-              sizes="40px"
+              sizes="36px"
               className="object-cover"
               priority
             />
           </div>
           <div className="leading-tight">
-            <div className="font-heading text-2xl tracking-wide">
+            <div className="font-heading text-[1.75rem] sm:text-2xl tracking-wide">
               Top Rankin&apos; Herb
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-[0.95rem] sm:text-sm text-muted-foreground">
               CBD with island soul
             </div>
           </div>

@@ -60,9 +60,9 @@ export function MobileStickyCta() {
       )}
     >
       <div className="mx-auto max-w-6xl rounded-2xl border border-border/70 bg-background/80 shadow-lg backdrop-blur">
-        <div className="flex items-center justify-between gap-3 px-3 py-3">
+        <div className="flex items-center justify-between gap-2 px-2.5 py-2.5">
           <div className="min-w-0">
-            <div className="font-heading text-xl tracking-wide">
+            <div className="font-heading text-lg tracking-wide max-[360px]:text-base">
               {afterDrops ? "Stay in the loop" : "Ready for the drop?"}
             </div>
             <div className="truncate text-xs text-muted-foreground">
@@ -71,9 +71,11 @@ export function MobileStickyCta() {
                 : "Tap to see featured drops"}
             </div>
           </div>
-          <div className="flex flex-wrap justify-end items-center gap-2">
+          <div className="flex flex-wrap justify-end items-center gap-1.5">
             <Button
               variant="secondary"
+              size="sm"
+              className="max-[360px]:px-2.5"
               onClick={() => {
                 track("StickyChatClick");
                 window.dispatchEvent(new Event("trh-open-chat"));
@@ -82,6 +84,8 @@ export function MobileStickyCta() {
               Chat <MessageCircle className="size-4" />
             </Button>
             <Button
+              size="sm"
+              className="max-[360px]:px-2.5"
               onClick={() => {
                 track(ctaEvent);
                 document.querySelector(ctaTarget)?.scrollIntoView({
