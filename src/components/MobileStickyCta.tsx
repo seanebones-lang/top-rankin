@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 
 export function MobileStickyCta() {
   const [shown, setShown] = React.useState(false);
+  const [afterDrops, setAfterDrops] = React.useState(false);
 
   React.useEffect(() => {
     const onScroll = () => {
@@ -19,6 +20,23 @@ export function MobileStickyCta() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  React.useEffect(() => {
+    const el = document.getElementById("drops");
+    if (!el) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => setAfterDrops(entry.isIntersecting),
+      { threshold: 0.25, rootMargin: "-96px 0px 0px 0px" },
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const ctaLabel = afterDrops ? "Join list" : "Shop";
+  const ctaTarget = afterDrops ? "#list" : "#drops";
+  const ctaEvent = afterDrops ? "StickyJoinClick" : "StickyShopClick";
 
   return (
     <div
@@ -31,22 +49,24 @@ export function MobileStickyCta() {
         <div className="flex items-center justify-between gap-3 px-3 py-3">
           <div className="min-w-0">
             <div className="font-heading text-xl tracking-wide">
-              Ready for the drop?
+              {afterDrops ? "Stay in the loop" : "Ready for the drop?"}
             </div>
             <div className="truncate text-xs text-muted-foreground">
-              Tap to see featured drops
+              {afterDrops
+                ? "Tap to join the email list"
+                : "Tap to see featured drops"}
             </div>
           </div>
           <Button
             onClick={() => {
-              track("StickyShopClick");
-              document.querySelector("#drops")?.scrollIntoView({
+              track(ctaEvent);
+              document.querySelector(ctaTarget)?.scrollIntoView({
                 behavior: "smooth",
                 block: "start",
               });
             }}
           >
-            Shop <ArrowRight className="size-4" />
+            {ctaLabel} <ArrowRight className="size-4" />
           </Button>
         </div>
       </div>

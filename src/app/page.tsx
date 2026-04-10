@@ -18,7 +18,7 @@ export default function Home() {
     <div className="min-h-[calc(100vh-1px)]">
       <HeaderNav />
 
-      <main className="mx-auto max-w-6xl px-5 pb-24 pt-14 sm:pt-20">
+      <main id="main" className="mx-auto max-w-6xl px-5 pb-24 pt-14 sm:pt-20">
         <section
           className="grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr]"
           style={{ scrollMarginTop: 96 }}

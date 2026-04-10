@@ -36,6 +36,12 @@ export function HeaderNav() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-border/70 bg-background/70 backdrop-blur">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-background focus:px-4 focus:py-2 focus:text-sm focus:shadow-lg focus:ring-2 focus:ring-ring/50"
+      >
+        Skip to content
+      </a>
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">
         <a
           href="#"

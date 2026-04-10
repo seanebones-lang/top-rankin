@@ -13,6 +13,11 @@ import { cn } from "@/lib/utils";
 
 type VoiceId = "ara" | "eve" | "sal" | "rex" | "leo";
 
+const STORAGE_KEYS = {
+  voiceEnabled: "trh_chat_voice_enabled",
+  voiceId: "trh_chat_voice_id",
+};
+
 export function ChatWidget() {
   const [open, setOpen] = React.useState(false);
   const [voiceEnabled, setVoiceEnabled] = React.useState(true);
@@ -34,6 +39,34 @@ export function ChatWidget() {
       await speak(text);
     },
   });
+
+  React.useEffect(() => {
+    try {
+      const savedEnabled = localStorage.getItem(STORAGE_KEYS.voiceEnabled);
+      const savedVoiceId = localStorage.getItem(STORAGE_KEYS.voiceId);
+      if (savedEnabled !== null) setVoiceEnabled(savedEnabled === "true");
+      if (
+        savedVoiceId === "ara" ||
+        savedVoiceId === "eve" ||
+        savedVoiceId === "sal" ||
+        savedVoiceId === "rex" ||
+        savedVoiceId === "leo"
+      ) {
+        setVoiceId(savedVoiceId);
+      }
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  React.useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEYS.voiceEnabled, String(voiceEnabled));
+      localStorage.setItem(STORAGE_KEYS.voiceId, voiceId);
+    } catch {
+      // ignore
+    }
+  }, [voiceEnabled, voiceId]);
 
   React.useEffect(() => {
     if (!open) return;
@@ -161,6 +194,11 @@ export function ChatWidget() {
                   </div>
                 );
               })}
+              {status !== "ready" ? (
+                <div className="mr-auto max-w-[85%] rounded-2xl border border-border/70 bg-card/50 px-3 py-2 text-sm text-muted-foreground">
+                  Typing…
+                </div>
+              ) : null}
               <div ref={endRef} />
             </div>
           </ScrollArea>
