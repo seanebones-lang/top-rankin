@@ -1,5 +1,13 @@
 import Image from "next/image";
-import { ArrowRight, ShieldCheck, Sparkles, Truck } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  ExternalLink,
+  Leaf,
+  ShieldCheck,
+  Sparkles,
+  Truck,
+} from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { EmailSignup } from "@/components/EmailSignup";
@@ -28,6 +36,9 @@ export default function Home() {
             <Button variant="ghost" asChild>
               <a href="#drops">Featured drops</a>
             </Button>
+            <Button variant="ghost" asChild>
+              <a href="#list">Email list</a>
+            </Button>
             <Button asChild>
               <a href="#drops">
                 Shop now <ArrowRight className="size-4" />
@@ -38,7 +49,10 @@ export default function Home() {
       </header>
 
       <main className="mx-auto max-w-6xl px-5 pb-24 pt-14 sm:pt-20">
-        <section className="grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr]">
+        <section
+          className="grid items-center gap-10 md:grid-cols-[1.2fr_0.8fr]"
+          style={{ scrollMarginTop: 96 }}
+        >
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-sm text-muted-foreground shadow-sm">
               <ShieldCheck className="size-4 text-primary" />
@@ -133,6 +147,53 @@ export default function Home() {
           </div>
         </section>
 
+        <section id="why" className="mt-14" style={{ scrollMarginTop: 96 }}>
+          <div className="grid gap-6 md:grid-cols-3">
+            <div className="rounded-[1.75rem] border border-border/70 bg-card/70 p-6 shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
+              <div className="flex items-center gap-3">
+                <div className="grid size-10 place-items-center rounded-2xl bg-primary/10 text-primary">
+                  <Leaf className="size-5" />
+                </div>
+                <div className="font-heading text-2xl tracking-wide">
+                  Island-inspired blends
+                </div>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Jamaican-rooted vibes with a modern wellness edge—crafted for
+                calm focus and easy nights.
+              </p>
+            </div>
+            <div className="rounded-[1.75rem] border border-border/70 bg-card/70 p-6 shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
+              <div className="flex items-center gap-3">
+                <div className="grid size-10 place-items-center rounded-2xl bg-accent/20 text-accent-foreground">
+                  <BadgeCheck className="size-5" />
+                </div>
+                <div className="font-heading text-2xl tracking-wide">
+                  Quality-first
+                </div>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Clean ingredients and straight talk. Add COAs and sourcing info
+                when your product images land.
+              </p>
+            </div>
+            <div className="rounded-[1.75rem] border border-border/70 bg-card/70 p-6 shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
+              <div className="flex items-center gap-3">
+                <div className="grid size-10 place-items-center rounded-2xl bg-background/60 text-primary">
+                  <Truck className="size-5" />
+                </div>
+                <div className="font-heading text-2xl tracking-wide">
+                  Easy checkout
+                </div>
+              </div>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                Hosted checkout via Square—simple, secure, and fast to complete
+                from mobile.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <section id="drops" className="mt-20">
           <div className="flex items-end justify-between gap-6">
             <div>
@@ -153,7 +214,7 @@ export default function Home() {
             {featuredProducts.map((p) => (
               <article
                 key={p.name}
-                className="overflow-hidden rounded-[1.75rem] border border-border/70 bg-card/70 shadow-sm"
+                className="group overflow-hidden rounded-[1.75rem] border border-border/70 bg-card/70 shadow-sm transition-transform duration-200 hover:-translate-y-0.5"
               >
                 <div className="h-44 bg-gradient-to-br from-primary/15 via-accent/10 to-transparent" />
                 <div className="p-6">
@@ -177,12 +238,14 @@ export default function Home() {
                         aria-label={`Buy ${p.name}`}
                         eventName="SquareBuyClick"
                         eventData={{ slug: p.slug }}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
-                        Buy (Square) <ArrowRight className="size-4" />
+                        Buy (Square) <ExternalLink className="size-4" />
                       </TrackedLink>
                     </Button>
                     <Button className="flex-1" variant="secondary" asChild>
-                      <a href="#faq">Details</a>
+                      <a href="#list">Get updates</a>
                     </Button>
                   </div>
                 </div>

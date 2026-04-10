@@ -16,6 +16,7 @@ export function EmailSignup() {
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (status === "loading") return;
     setStatus("loading");
     setMessage(null);
 
@@ -71,7 +72,13 @@ export function EmailSignup() {
       </Button>
 
       {message ? (
-        <p className="sm:col-span-5 text-sm text-muted-foreground">{message}</p>
+        <p
+          className="sm:col-span-5 text-sm text-muted-foreground"
+          role="status"
+          aria-live="polite"
+        >
+          {message}
+        </p>
       ) : null}
     </form>
   );
