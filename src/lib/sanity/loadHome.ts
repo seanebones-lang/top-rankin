@@ -1,10 +1,11 @@
-import { unstable_cache } from "next/cache";
+import { cache } from "react";
+import { unstable_noStore as noStore } from "next/cache";
 
 import type { Product } from "@/content/products";
 import { featuredProducts as fallbackFeatured } from "@/content/products";
 import { DEFAULT_CASH_APP_PAY_URL } from "@/lib/default-cash-app";
 
-import { sanityClient } from "./client";
+import { sanityLiveClient } from "./client";
 import { sanityProductImageUrl } from "./image";
 import { homePageQuery } from "./queries";
 
@@ -52,30 +53,28 @@ function mapFeatured(
   return out;
 }
 
-async function fetchHomeRaw(): Promise<SanityHomeDocument | null> {
-  try {
-    return await sanityClient.fetch<SanityHomeDocument | null>(homePageQuery);
-  } catch {
-    return null;
-  }
-}
-
-export const getHomePageData = unstable_cache(
-  async () => fetchHomeRaw(),
-  ["sanity-home-page"],
-  // Webhook clears `sanity:home` instantly; without webhook edits can lag briefly.
-  { tags: ["sanity:home"], revalidate: 10 },
+const getHomeSanityPayload = cache(
+  async (): Promise<SanityHomeDocument | null> => {
+    noStore();
+    try {
+      return await sanityLiveClient.fetch<SanityHomeDocument | null>(
+        homePageQuery,
+      );
+    } catch {
+      return null;
+    }
+  },
 );
 
 export async function resolveHomeProducts(): Promise<Product[]> {
-  const data = await getHomePageData();
+  const data = await getHomeSanityPayload();
   const mapped = mapFeatured(data?.featuredProducts);
   if (mapped.length > 0) return mapped;
   return fallbackFeatured;
 }
 
 export async function resolveUrgencyBanner() {
-  const data = await getHomePageData();
+  const data = await getHomeSanityPayload();
   const fallbackIso =
     process.env.NEXT_PUBLIC_DROP_END_AT ?? "2026-04-17T23:59:59-04:00";
   const defaultSupporting = "Join the list for first restock alerts.";

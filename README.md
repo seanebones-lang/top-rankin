@@ -38,7 +38,7 @@ Create a `.env.local` (or set in Vercel → Project → Settings → Environment
 **Sanity (webhook, optional but recommended)**
 
 - **`SANITY_REVALIDATE_SECRET`**: shared secret for `POST /api/revalidate-sanity` (create a GROQ webhook in Sanity Manage → API → Webhooks targeting that URL with the same secret).
-- Without the webhook, the homepage Sanity cache can lag up to ~**30 seconds** after you publish (`unstable_cache` in `src/lib/sanity/loadHome.ts`). With the webhook, publishes **clear the cache immediately** (`revalidateTag("sanity:home")`).
+- The homepage reads **live Sanity** (`sanityLiveClient`, `useCdn: false`) and is **`force-dynamic`**, so CMS publishes show on refresh without relying on ISR. Keep the webhook anyway so **`revalidatePath("/")`** runs on publish.
 
 **Site**
 

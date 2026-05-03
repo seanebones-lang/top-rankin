@@ -17,6 +17,10 @@ import { HeaderNav } from "@/components/HeaderNav";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { UrgencyBanner } from "@/components/UrgencyBanner";
 import { resolveHomeProducts, resolveUrgencyBanner } from "@/lib/sanity/loadHome";
+
+/** Always hit server + live Sanity for home (no stale static shell for CMS). */
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   const products = await resolveHomeProducts();
   const urgency = await resolveUrgencyBanner();
