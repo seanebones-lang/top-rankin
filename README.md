@@ -17,6 +17,15 @@ pnpm dev
 
 Open `http://localhost:3000`. CMS: `http://localhost:3000/studio`.
 
+### Editors (Sanity Studio link for clients)
+
+After you invite them in [Sanity Manage](https://www.sanity.io/manage/project/swis517n) (**Project** → **Team** / invite) with **Viewer**, **Editor**, or **Administrator** access, they sign in at:
+
+- **`https://top.mothership-ai.com/studio`** (primary production domain)
+- **`https://top-rankin.vercel.app/studio`** (Vercel default domain)
+
+Either URL loads the same CMS. They authenticate with Sanity (Google/GitHub/email), not Vercel.
+
 ## Environment variables
 
 Create a `.env.local` (or set in Vercel → Project → Settings → Environment Variables):
@@ -32,7 +41,7 @@ Create a `.env.local` (or set in Vercel → Project → Settings → Environment
 
 **Site**
 
-- **`NEXT_PUBLIC_SITE_URL`**: optional (e.g. `https://toprankinherb.com`). Used for metadata, sitemap, and robots.
+- **`NEXT_PUBLIC_SITE_URL`**: optional (e.g. `https://top.mothership-ai.com` or `https://top-rankin.vercel.app`). Used for metadata, sitemap, and robots. Set in Vercel to your **primary** production domain.
 - **`NEXT_PUBLIC_DROP_END_AT`**: optional ISO datetime — urgency banner fallback if Sanity has no `dropEndsAt` yet.
 
 **Other**
