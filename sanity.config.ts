@@ -3,6 +3,7 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 
 import { schemaTypes } from "./sanity/schemaTypes";
+import { productDocumentActions } from "./sanity/actions/productDocumentActions";
 import { structure } from "./sanity/structure";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? "swis517n";
@@ -15,6 +16,9 @@ export default defineConfig({
   dataset,
   basePath: "/studio",
   schema: { types: schemaTypes },
+  document: {
+    actions: productDocumentActions,
+  },
   plugins: [
     structureTool({
       structure,
