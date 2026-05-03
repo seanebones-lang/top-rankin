@@ -28,7 +28,7 @@ export default function OpenGraphImage() {
             lineHeight: 1,
           }}
         >
-          Top Rankin&apos; Herb
+          Top Rankin&apos; Herbs-n-Oils
         </div>
         <div
           style={{

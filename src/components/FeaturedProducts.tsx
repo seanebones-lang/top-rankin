@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { ExternalLink, Info } from "lucide-react";
 import { track } from "@vercel/analytics";
 
@@ -25,7 +26,17 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
           key={p.slug}
           className="group overflow-hidden rounded-[1.75rem] border border-border/70 bg-card/70 shadow-sm transition-transform duration-200 hover:-translate-y-0.5"
         >
-          <div className="h-44 bg-gradient-to-br from-primary/15 via-accent/10 to-transparent" />
+          <div className="relative h-44 overflow-hidden bg-gradient-to-br from-primary/15 via-accent/10 to-transparent">
+            {p.imageUrl ? (
+              <Image
+                src={p.imageUrl}
+                alt={p.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+            ) : null}
+          </div>
           <div className="p-6">
             <div className="flex items-start justify-between gap-4">
               <div>
@@ -40,14 +51,14 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
             <div className="mt-5 flex gap-3">
               <Button className="flex-1" asChild>
                 <TrackedLink
-                  href={p.squareCheckoutUrl}
-                  aria-label={`Buy ${p.name}`}
-                  eventName="SquareBuyClick"
+                  href={p.cashAppPayUrl}
+                  aria-label={`Pay with Cash App for ${p.name}`}
+                  eventName="CashAppPayClick"
                   eventData={{ slug: p.slug }}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Buy <ExternalLink className="size-4" />
+                  Cash App <ExternalLink className="size-4" />
                 </TrackedLink>
               </Button>
 
@@ -94,14 +105,14 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
                   <div className="mt-6">
                     <Button className="w-full" asChild>
                       <TrackedLink
-                        href={p.squareCheckoutUrl}
-                        aria-label={`Buy ${p.name}`}
-                        eventName="SquareBuyClick"
-                        eventData={{ slug: p.slug }}
+                        href={p.cashAppPayUrl}
+                        aria-label={`Pay with Cash App for ${p.name}`}
+                        eventName="CashAppPayClick"
+                        eventData={{ slug: p.slug, source: "sheet" }}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Buy on Square <ExternalLink className="size-4" />
+                        Pay with Cash App <ExternalLink className="size-4" />
                       </TrackedLink>
                     </Button>
                   </div>
@@ -114,4 +125,3 @@ export function FeaturedProducts({ products }: { products: Product[] }) {
     </div>
   );
 }
-

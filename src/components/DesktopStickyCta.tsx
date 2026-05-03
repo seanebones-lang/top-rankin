@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { usePathname } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { track } from "@vercel/analytics";
 
@@ -8,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function DesktopStickyCta() {
+  const pathname = usePathname();
   const [visible, setVisible] = React.useState(false);
   const [afterDrops, setAfterDrops] = React.useState(false);
 
@@ -35,6 +37,18 @@ export function DesktopStickyCta() {
   const target = afterDrops ? "#list" : "#drops";
   const label = afterDrops ? "Join email list" : "Shop featured drops";
 
+  const goTarget = () => {
+    track("DesktopStickyCtaClick", { to: afterDrops ? "list" : "drops" });
+    if (pathname !== "/") {
+      window.location.assign(`/${target}`);
+      return;
+    }
+    document.querySelector(target)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <aside
       className={cn(
@@ -53,13 +67,7 @@ export function DesktopStickyCta() {
         </p>
         <Button
           className="mt-3 w-full"
-          onClick={() => {
-            track("DesktopStickyCtaClick", { to: afterDrops ? "list" : "drops" });
-            document.querySelector(target)?.scrollIntoView({
-              behavior: "smooth",
-              block: "start",
-            });
-          }}
+          onClick={goTarget}
         >
           {label} <ArrowRight className="size-4" />
         </Button>

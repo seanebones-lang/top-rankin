@@ -11,13 +11,16 @@ function formatRemaining(ms: number) {
   return { days, hours, minutes };
 }
 
-export function UrgencyBanner() {
+export function UrgencyBanner({
+  endsAtISO,
+  supportingText,
+}: {
+  endsAtISO: string;
+  supportingText: string;
+}) {
   const dropEndsAt = React.useMemo(
-    () =>
-      new Date(
-        process.env.NEXT_PUBLIC_DROP_END_AT ?? "2026-04-17T23:59:59-04:00",
-      ).getTime(),
-    [],
+    () => new Date(endsAtISO).getTime(),
+    [endsAtISO],
   );
   const [now, setNow] = React.useState<number | null>(null);
 
@@ -37,11 +40,8 @@ export function UrgencyBanner() {
         <span className="rounded-full bg-background/70 px-2 py-0.5">
           {remaining.days}d {remaining.hours}h {remaining.minutes}m
         </span>
-        <span className="text-muted-foreground">
-          Join the list for first restock alerts.
-        </span>
+        <span className="text-muted-foreground">{supportingText}</span>
       </div>
     </div>
   );
 }
-

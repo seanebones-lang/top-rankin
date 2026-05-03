@@ -9,17 +9,20 @@ export default function PrivacyPage() {
       <div className="mt-8 space-y-4 text-sm leading-7 text-muted-foreground">
         <p>
           We collect the information you choose to share with us (for example,
-          when you contact support or place an order via Square). We use it to
+          when you contact support or pay through Cash App). We use it to
           provide service, fulfill orders, and improve the experience.
         </p>
         <p>
           We do not sell your personal information. Payment details are handled
-          by our checkout provider (Square).
+          by Cash App according to their terms and privacy policy.
         </p>
         <p>
           If you have questions, email{" "}
-          <a className="text-foreground underline" href="mailto:hello@toprankinherb.com">
-            hello@toprankinherb.com
+          <a
+            className="text-foreground underline"
+            href="mailto:toprankin.herbsnoils@gmail.com"
+          >
+            toprankin.herbsnoils@gmail.com
           </a>
           .
         </p>
@@ -27,4 +30,3 @@ export default function PrivacyPage() {
     </main>
   );
 }
-

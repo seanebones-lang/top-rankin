@@ -1,13 +1,40 @@
 import { z } from "zod";
 import { track } from "@vercel/analytics/server";
-import { Redis } from "@upstash/redis";
+import { createClient } from "redis";
 
-export const runtime = "edge";
+/** TCP Redis (Redis Cloud, Vercel `REDIS_URL`, etc.). Not compatible with Edge. */
+export const runtime = "nodejs";
 
 const SubscribeSchema = z.object({
   email: z.string().email().max(254),
   name: z.string().trim().max(120).optional(),
 });
+
+type RedisClient = ReturnType<typeof createClient>;
+
+/** Re-use one connection across warm serverless invocations. */
+const globalForRedis = globalThis as typeof globalThis & {
+  __subscribeRedis?: RedisClient;
+};
+
+async function getRedis(): Promise<RedisClient> {
+  const url = process.env.REDIS_URL?.trim();
+  if (!url) {
+    throw new Error("REDIS_URL is not set");
+  }
+
+  if (!globalForRedis.__subscribeRedis) {
+    const client = createClient({ url });
+    client.on("error", (err) => console.error("[subscribe] Redis error:", err));
+    globalForRedis.__subscribeRedis = client;
+  }
+
+  const redis = globalForRedis.__subscribeRedis;
+  if (!redis.isOpen) {
+    await redis.connect();
+  }
+  return redis;
+}
 
 function normalizeEmail(email: string) {
   return email.trim().toLowerCase();
@@ -19,33 +46,42 @@ export async function POST(req: Request) {
     return Response.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  if (!process.env.UPSTASH_REDIS_REST_URL || !process.env.UPSTASH_REDIS_REST_TOKEN) {
+  let redis: RedisClient;
+  try {
+    redis = await getRedis();
+  } catch {
     return Response.json(
-      { error: "Email list is not configured on server." },
+      {
+        error:
+          "Email list is not configured. Set REDIS_URL to your Redis connection string (e.g. redis://default:PASSWORD@HOST:PORT — use TLS rediss:// if your provider requires it).",
+      },
       { status: 500 },
     );
   }
 
-  const redis = Redis.fromEnv();
-
   const email = normalizeEmail(parsed.data.email);
   const name = parsed.data.name?.trim() || null;
-
   const now = Date.now();
 
-  // De-dup via set membership
-  const added = await redis.sadd("toprankin:email_list", email);
+  try {
+    const addedMembers = await redis.sAdd("toprankin:email_list", email);
+    const newlyAdded = addedMembers === 1;
 
-  // Keep a lightweight profile for export/debugging
-  await redis.hset(`toprankin:email:${email}`, {
-    email,
-    name: name ?? "",
-    firstSeenAt: String(now),
-    lastSeenAt: String(now),
-  });
+    await redis.hSet(`toprankin:email:${email}`, {
+      email,
+      name: name ?? "",
+      firstSeenAt: String(now),
+      lastSeenAt: String(now),
+    });
 
-  await track("EmailSignup", { added: String(added === 1) });
+    await track("EmailSignup", { added: String(newlyAdded) });
 
-  return Response.json({ ok: true, added: added === 1 });
+    return Response.json({ ok: true, added: newlyAdded });
+  } catch (err) {
+    console.error("[subscribe]", err);
+    return Response.json(
+      { error: "Could not save signup. Try again later." },
+      { status: 502 },
+    );
+  }
 }
-

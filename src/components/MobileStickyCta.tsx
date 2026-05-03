@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { usePathname } from "next/navigation";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import { track } from "@vercel/analytics";
 
@@ -8,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function MobileStickyCta() {
+  const pathname = usePathname();
   const [shown, setShown] = React.useState(false);
   const [afterDrops, setAfterDrops] = React.useState(false);
   const [chatOpen, setChatOpen] = React.useState(false);
@@ -52,6 +54,17 @@ export function MobileStickyCta() {
   const ctaTarget = afterDrops ? "#list" : "#drops";
   const ctaEvent = afterDrops ? "StickyJoinClick" : "StickyShopClick";
 
+  const goToShopOrList = () => {
+    if (pathname !== "/") {
+      window.location.assign(`/${ctaTarget}`);
+      return;
+    }
+    document.querySelector(ctaTarget)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  };
+
   return (
     <div
       className={cn(
@@ -88,10 +101,7 @@ export function MobileStickyCta() {
               className="max-[360px]:px-2.5"
               onClick={() => {
                 track(ctaEvent);
-                document.querySelector(ctaTarget)?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
+                goToShopOrList();
               }}
             >
               {ctaLabel} <ArrowRight className="size-4" />

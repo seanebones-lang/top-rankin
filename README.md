@@ -1,8 +1,9 @@
-## Top Rankin' Herb
+## Top Rankin' Herbs-n-Oils
 
-Modern Vercel-ready storefront/landing page for **Top Rankin' Herb** (Jamaican/Rastafarian-inspired theme) with:
+Modern Vercel-ready storefront/landing page for **Top Rankin' Herbs-n-Oils** (Jamaican/Rastafarian-inspired theme) with:
 
-- **Square checkout links** for featured products
+- **Sanity CMS** at `/studio` — products, featured-drop order, urgency banner (project `swis517n`)
+- **Cash App only** — each product has a **Cash App pay URL** (fallback seed uses [`$toprankinherbsandoils`](https://cash.app/$toprankinherbsandoils); override per SKU in Sanity as needed)
 - **Grok (xAI) chat** at `POST /api/chat`
 - **xAI Text-to-Speech** at `POST /api/tts` (bot speaks responses)
 
@@ -14,26 +15,45 @@ Install deps and run the dev server:
 pnpm dev
 ```
 
-Open `http://localhost:3000`.
+Open `http://localhost:3000`. CMS: `http://localhost:3000/studio`.
 
 ## Environment variables
 
 Create a `.env.local` (or set in Vercel → Project → Settings → Environment Variables):
 
+**Sanity (storefront reads)**
+
+- **`NEXT_PUBLIC_SANITY_PROJECT_ID`**: `swis517n` (default in code if unset).
+- **`NEXT_PUBLIC_SANITY_DATASET`**: usually `production`.
+
+**Sanity (webhook, optional but recommended)**
+
+- **`SANITY_REVALIDATE_SECRET`**: shared secret for `POST /api/revalidate-sanity` (create a GROQ webhook in Sanity Manage → API → Webhooks targeting that URL with the same secret).
+
+**Site**
+
+- **`NEXT_PUBLIC_SITE_URL`**: optional (e.g. `https://toprankinherb.com`). Used for metadata, sitemap, and robots.
+- **`NEXT_PUBLIC_DROP_END_AT`**: optional ISO datetime — urgency banner fallback if Sanity has no `dropEndsAt` yet.
+
+**Other**
+
 - **`XAI_API_KEY`**: required (server-only). Used by both `/api/chat` and `/api/tts`.
-- **`NEXT_PUBLIC_SITE_URL`**: optional (e.g. `https://toprankinherb.com`). Used for metadata base URL.
-- **`NEXT_PUBLIC_DROP_END_AT`**: optional ISO datetime used by the urgency banner countdown (example: `2026-04-17T23:59:59-04:00`).
-- **`UPSTASH_REDIS_REST_URL`**, **`UPSTASH_REDIS_REST_TOKEN`**: required for the email list (`/api/subscribe`). Add a Redis integration in Vercel Marketplace (Upstash Redis) to auto-provision these.
+- **`REDIS_URL`**: required for the email list (`/api/subscribe`). Use the full connection string Redis gives you (same as `redis-cli -u`). Example shape: `redis://default:PASSWORD@HOST:PORT` or `rediss://...` if TLS is required.
 
-Security: if you ever paste an API key into chat/logs, treat it as compromised and **revoke it** in the xAI console.
+Security: if you ever paste an API key into chat/logs, treat it as compromised and **revoke it** in the xAI console. **Never post Redis passwords publicly** — rotate them in Redis Cloud if they were exposed.
 
-## Editing products (Square links)
+## Editing products
 
-Update featured products in:
+1. **Preferred:** open **Sanity Studio** (`/studio`), edit **Products** and **Site settings** (featured order, countdown).
+2. **Fallback:** when CMS has no featured list yet, the site uses `src/content/products.ts` — set each **`cashAppPayUrl`** to your real **https** Cash App payment link.
 
-- `src/content/products.ts`
+## Schema deploy (Sanity)
 
-Replace each `squareCheckoutUrl: "#"` with your real Square checkout link.
+After changing files under `sanity/`, push the schema to your dataset:
+
+```bash
+pnpm sanity:schema:deploy
+```
 
 ## Build
 
@@ -45,11 +65,12 @@ pnpm start
 ## Deploy on Vercel
 
 1. Import this repo into Vercel.
-2. Set `XAI_API_KEY` (and optionally `NEXT_PUBLIC_SITE_URL`) in Vercel env vars.
-3. Deploy.
+2. Set `XAI_API_KEY`, Redis vars, `NEXT_PUBLIC_SANITY_*`, and `SANITY_REVALIDATE_SECRET` as needed.
+3. Add a Sanity webhook to `https://<your-domain>/api/revalidate-sanity` with the same secret.
+4. Deploy.
 
 Notes:
-- The chat widget is mounted globally in `src/app/layout.tsx` via `src/components/ChatWidget.tsx`.
-- SEO endpoints: `/sitemap.xml`, `/robots.txt`, and `/opengraph-image`.
-- Email list: signup section is on the homepage (`#list`) and posts to `POST /api/subscribe`.
-- Countdown: set `NEXT_PUBLIC_DROP_END_AT` in Vercel and redeploy to update the limited-drop timer.
+
+- Chat widget: `src/app/layout.tsx` → `src/components/ChatWidget.tsx`.
+- SEO: `/sitemap.xml`, `/robots.txt`, `/opengraph-image`, **`/learn`** (CBD pamphlet-style guide).
+- Email list: homepage `#list` → `POST /api/subscribe`.

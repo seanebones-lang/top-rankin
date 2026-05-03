@@ -8,8 +8,8 @@ export default function TermsPage() {
       </p>
       <div className="mt-8 space-y-4 text-sm leading-7 text-muted-foreground">
         <p>
-          Purchases are completed through our checkout provider (Square). Order
-          confirmations and receipts are issued by Square.
+          Purchases are completed through Cash App. Order confirmations and
+          receipts are issued according to Cash App&apos;s flows.
         </p>
         <p>
           Product availability and prices are subject to change. Effects vary by
@@ -17,8 +17,11 @@ export default function TermsPage() {
         </p>
         <p>
           Questions? Email{" "}
-          <a className="text-foreground underline" href="mailto:hello@toprankinherb.com">
-            hello@toprankinherb.com
+          <a
+            className="text-foreground underline"
+            href="mailto:toprankin.herbsnoils@gmail.com"
+          >
+            toprankin.herbsnoils@gmail.com
           </a>
           .
         </p>
@@ -26,4 +29,3 @@ export default function TermsPage() {
     </main>
   );
 }
-

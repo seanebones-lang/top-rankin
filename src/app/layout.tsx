@@ -7,6 +7,7 @@ import { BackToTopButton } from "@/components/BackToTopButton";
 import { ChatWidget } from "@/components/ChatWidget";
 import { DesktopStickyCta } from "@/components/DesktopStickyCta";
 import { MobileStickyCta } from "@/components/MobileStickyCta";
+import { siteUrl } from "@/lib/site-url";
 
 const bodyFont = Alegreya({
   variable: "--font-sans",
@@ -19,24 +20,23 @@ const headingFont = Bebas_Neue({
   weight: ["400"],
 });
 
+const brand = "Top Rankin' Herbs-n-Oils";
+const description =
+  "Top-shelf CBD with island soul. Small-batch blends, clean ingredients, and vibes you can feel.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.NEXT_PUBLIC_SITE_URL ?? "https://toprankinherb.com",
-  ),
-  title: "Top Rankin' Herb",
-  description:
-    "Top-shelf CBD with island soul. Small-batch blends, clean ingredients, and vibes you can feel.",
+  metadataBase: new URL(siteUrl),
+  title: brand,
+  description,
   openGraph: {
-    title: "Top Rankin' Herb",
-    description:
-      "Top-shelf CBD with island soul. Small-batch blends, clean ingredients, and vibes you can feel.",
+    title: brand,
+    description,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Top Rankin' Herb",
-    description:
-      "Top-shelf CBD with island soul. Small-batch blends, clean ingredients, and vibes you can feel.",
+    title: brand,
+    description,
   },
 };
 

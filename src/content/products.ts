@@ -3,7 +3,9 @@ export type Product = {
   name: string;
   note: string;
   priceLabel: string;
-  squareCheckoutUrl: string;
+  cashAppPayUrl: string;
+  /** When set (e.g. from Sanity), replaces the gradient artwork on the card. */
+  imageUrl?: string | null;
   details?: {
     subtitle?: string;
     bullets?: string[];
@@ -17,7 +19,7 @@ export const featuredProducts: Product[] = [
     name: "Island Calm Gummies",
     note: "Sweet + steady • evening wind-down",
     priceLabel: "$29",
-    squareCheckoutUrl: "#",
+    cashAppPayUrl: "https://cash.app/$toprankinherbsandoils",
     details: {
       subtitle: "A smooth nightly vibe, one chew at a time.",
       bullets: [
@@ -34,7 +36,7 @@ export const featuredProducts: Product[] = [
     name: "Herb & Honey Tincture",
     note: "Smooth dropper • everyday balance",
     priceLabel: "$39",
-    squareCheckoutUrl: "#",
+    cashAppPayUrl: "https://cash.app/$toprankinherbsandoils",
     details: {
       subtitle: "Everyday balance with a clean finish.",
       bullets: [
@@ -51,7 +53,7 @@ export const featuredProducts: Product[] = [
     name: "Top Rankin’ Relief Balm",
     note: "Cooling comfort • post-work recovery",
     priceLabel: "$24",
-    squareCheckoutUrl: "#",
+    cashAppPayUrl: "https://cash.app/$toprankinherbsandoils",
     details: {
       subtitle: "Targeted comfort after training or long days.",
       bullets: [
@@ -64,4 +66,3 @@ export const featuredProducts: Product[] = [
     },
   },
 ];
-

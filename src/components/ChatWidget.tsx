@@ -124,7 +124,7 @@ export function ChatWidget() {
           <div className="flex items-center justify-between gap-3 border-b border-border/70 px-4 py-3">
             <div className="leading-tight">
               <div className="font-heading text-xl tracking-wide">
-                Ask Top Rankin&apos;
+                Ask Top Rankin&apos; Herbs-n-Oils
               </div>
               <div className="text-xs text-muted-foreground">
                 Product help • shipping • FAQs

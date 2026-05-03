@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import { track } from "@vercel/analytics";
@@ -31,7 +32,7 @@ export function HeaderNav() {
     return () => io.disconnect();
   }, []);
 
-  const primaryHref = afterDrops ? "#list" : "#drops";
+  const primaryHref = afterDrops ? "/#list" : "/#drops";
   const primaryLabel = afterDrops ? "Join list" : "Shop now";
 
   return (
@@ -43,16 +44,16 @@ export function HeaderNav() {
         Skip to content
       </a>
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-5 sm:py-4">
-        <a
-          href="#"
+        <Link
+          href="/"
           className="flex items-center gap-2 sm:gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 rounded-2xl"
           onClick={() => track("HeaderBrandClick")}
-          aria-label="Top Rankin' Herb home"
+          aria-label="Top Rankin' Herbs-n-Oils home"
         >
           <div className="relative size-9 sm:size-10 overflow-hidden rounded-2xl border border-border/70 bg-card/70 shadow-sm">
             <Image
               src="/images/logo.jpg"
-              alt="Top Rankin' Herb logo"
+              alt="Top Rankin' Herbs-n-Oils logo"
               fill
               sizes="36px"
               className="object-cover"
@@ -61,34 +62,39 @@ export function HeaderNav() {
           </div>
           <div className="leading-tight">
             <div className="font-heading text-[1.75rem] sm:text-2xl tracking-wide">
-              Top Rankin&apos; Herb
+              Top Rankin&apos; Herbs-n-Oils
             </div>
             <div className="text-[0.95rem] sm:text-sm text-muted-foreground">
               CBD with island soul
             </div>
           </div>
-        </a>
+        </Link>
 
         <div className="hidden items-center gap-2 sm:flex">
           <Button variant="ghost" asChild>
-            <a href="#drops" onClick={() => track("HeaderNavClick", { to: "drops" })}>
-              Featured drops
-            </a>
+            <Link href="/learn" onClick={() => track("HeaderNavClick", { to: "learn" })}>
+              CBD guide
+            </Link>
           </Button>
           <Button variant="ghost" asChild>
-            <a href="#list" onClick={() => track("HeaderNavClick", { to: "list" })}>
+            <Link href="/#drops" onClick={() => track("HeaderNavClick", { to: "drops" })}>
+              Featured drops
+            </Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href="/#list" onClick={() => track("HeaderNavClick", { to: "list" })}>
               Email list
-            </a>
+            </Link>
           </Button>
           <Button asChild>
-            <a
+            <Link
               href={primaryHref}
               onClick={() =>
                 track("HeaderPrimaryClick", { to: afterDrops ? "list" : "drops" })
               }
             >
               {primaryLabel} <ArrowRight className="size-4" />
-            </a>
+            </Link>
           </Button>
         </div>
       </div>

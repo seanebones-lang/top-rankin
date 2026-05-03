@@ -1,12 +1,11 @@
 import type { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://toprankinherb.com";
+import { siteUrl } from "@/lib/site-url";
 
+export default function sitemap(): MetadataRoute.Sitemap {
   return [
-    { url: baseUrl, lastModified: new Date() },
-    { url: `${baseUrl}/privacy`, lastModified: new Date() },
-    { url: `${baseUrl}/terms`, lastModified: new Date() },
+    { url: siteUrl, lastModified: new Date() },
+    { url: `${siteUrl}/learn`, lastModified: new Date() },
+    { url: `${siteUrl}/terms`, lastModified: new Date() },
   ];
 }
-
