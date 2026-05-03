@@ -17,8 +17,6 @@ import { HeaderNav } from "@/components/HeaderNav";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { UrgencyBanner } from "@/components/UrgencyBanner";
 import { resolveHomeProducts, resolveUrgencyBanner } from "@/lib/sanity/loadHome";
-import { DEFAULT_CASH_APP_PAY_URL } from "@/lib/default-cash-app";
-
 export default async function Home() {
   const products = await resolveHomeProducts();
   const urgency = await resolveUrgencyBanner();
@@ -45,7 +43,7 @@ export default async function Home() {
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/70 px-4 py-2 text-sm text-muted-foreground shadow-sm">
               <ShieldCheck className="size-4 text-primary" />
-              Clean ingredients. Clear vibes. Built for calm.
+              Clean ingredients. Clear standards. Made for calm.
             </div>
 
             <h1 className="mt-5 sm:mt-6 font-heading text-4xl max-[360px]:text-[2.05rem] leading-[0.9] max-[360px]:leading-[0.94] tracking-wide sm:text-6xl [text-wrap:balance]">
@@ -90,13 +88,13 @@ export default async function Home() {
               <div className="rounded-2xl border border-border/70 bg-card/70 p-4 shadow-sm">
                 <dt className="text-sm font-medium">Transparent quality</dt>
                 <dd className="mt-1 text-sm text-muted-foreground">
-                  Clear sourcing and straight talk.
+                  Responsible sourcing and transparent product information.
                 </dd>
               </div>
               <div className="rounded-2xl border border-border/70 bg-card/70 p-4 shadow-sm">
                 <dt className="text-sm font-medium">Made for daily life</dt>
                 <dd className="mt-1 text-sm text-muted-foreground">
-                  Calm focus, recovery, and chill.
+                  Balance for focus, recovery, and restorative rest.
                 </dd>
               </div>
             </dl>
@@ -115,8 +113,8 @@ export default async function Home() {
                   </div>
                 </div>
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  A smooth, earthy profile with a bright finish. Designed for a
-                  steady calm without killing your momentum.
+                  A smooth, earthy profile with a bright finish—crafted for steady
+                  calm while you stay present and productive.
                 </p>
 
                 <div className="mt-5 overflow-hidden rounded-2xl border border-border/70 bg-background/40">
@@ -133,7 +131,7 @@ export default async function Home() {
                 <div className="mt-5 flex flex-col gap-2">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Truck className="size-4 text-primary" />
-                    Ships fast from the U.S. (details in FAQ)
+                    Ships from the United States—see FAQ for fulfillment details.
                   </div>
                   <Button size="lg" className="w-full" asChild>
                     <a href="#drops">
@@ -176,8 +174,9 @@ export default async function Home() {
                 </div>
               </div>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                Clean ingredients and straight talk. Add COAs and sourcing info
-                when your product images land.
+                Carefully selected ingredients and consistent small-batch quality.
+                Lab results and sourcing details appear on product materials as
+                they are published.
               </p>
             </div>
             <div className="rounded-[1.75rem] border border-border/70 bg-card/70 p-5 sm:p-6 shadow-sm transition-transform duration-200 hover:-translate-y-0.5">
@@ -190,17 +189,9 @@ export default async function Home() {
                 </div>
               </div>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                Checkout happens in Cash App—simple steps and easy to finish on
-                your phone. Business profile{" "}
-                <a
-                  className="text-foreground underline underline-offset-4"
-                  href={DEFAULT_CASH_APP_PAY_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  $toprankinherbsnoils
-                </a>
-                ; each Pay button opens the linked checkout for that product.
+                Complete purchases securely with Cash App on your mobile device.
+                Each product&apos;s Pay button opens the correct payment request
+                for that item.
               </p>
             </div>
           </div>
@@ -217,8 +208,8 @@ export default async function Home() {
                 Featured drops
               </h2>
               <p className="mt-2 max-w-2xl text-muted-foreground">
-                Best-sellers and limited runs — update order and Pay links anytime
-                in Sanity Studio (<code className="text-xs">/studio</code>).
+                Curated favorites and limited releases from our current lineup.
+                Inventory and availability are updated regularly.
               </p>
             </div>
             <Button variant="secondary" asChild className="hidden sm:inline-flex">
@@ -238,11 +229,11 @@ export default async function Home() {
             <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
               <div>
                 <h2 className="font-heading text-3xl sm:text-4xl tracking-wide">
-                  Loved by the calm seekers
+                  Voices from customers
                 </h2>
                 <p className="mt-2 max-w-2xl text-muted-foreground">
-                  Drop in real testimonials when you&apos;re ready. For now, these
-                  are placeholders to show the layout.
+                  Customers share how Top Rankin&apos; blends fit their day-to-day
+                  routines.
                 </p>
               </div>
               <Button variant="secondary" asChild>
@@ -276,8 +267,8 @@ export default async function Home() {
                   Get early access
                 </h2>
                 <p className="mt-2 text-muted-foreground">
-                  Drops, deals, and new blends—straight to your inbox. No spam,
-                  just vibes.
+                  Limited releases, offers, and product updates by email—only what
+                  you need. You can unsubscribe at any time.
                 </p>
                 <EmailSignup />
                 <p className="mt-3 text-xs text-muted-foreground">

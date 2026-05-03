@@ -39,7 +39,9 @@ export function EmailSignup() {
     }
 
     setStatus("success");
-    setMessage("You’re on the list. Big up—watch for the next drop.");
+    setMessage(
+      "Thank you. Watch your inbox for new releases, offers, and restock announcements.",
+    );
     track("EmailSignupSuccess");
     setEmail("");
     setName("");

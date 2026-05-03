@@ -17,7 +17,8 @@ const TESTIMONIALS: Testimonial[] = [
     name: "A. R.",
   },
   {
-    quote: "Fast Cash App checkout—the balm hits after workouts every single time.",
+    quote:
+      "An efficient checkout—and this balm has become part of my post-workout routine.",
     name: "J. K.",
   },
   {

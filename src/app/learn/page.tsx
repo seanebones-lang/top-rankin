@@ -172,9 +172,10 @@ export default function LearnPage() {
             Top Rankin&apos; Herbs-n-Oils CBD guide
           </h1>
           <p className="mt-4 max-w-3xl text-base text-muted-foreground sm:text-lg [text-wrap:pretty]">
-            Straight talk from our printed materials—what CBD is, how your endocannabinoid
-            system fits in, what &ldquo;THC free&rdquo; and organic MCT mean for us, a weight-based
-            reference chart, and common wellness conversation starters.
+            Clear, informative material drawn from our printed guides: what CBD
+            is, how your endocannabinoid system fits in, what &ldquo;THC
+            free&rdquo; and organic MCT mean for us, a weight-based reference
+            chart, and common wellness considerations.
           </p>
         </header>
 

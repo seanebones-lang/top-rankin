@@ -36,17 +36,17 @@ const FAQ_ITEMS: { q: string; a: ReactNode }[] = [
     q: "Shipping and returns",
     a: (
       <>
-        Checkout is completed in Cash App. Pay from each product&apos;s button (links go to{" "}
+        Checkout is completed in Cash App from each product&apos;s Pay button{" "}
         <a
           className="font-medium text-foreground underline underline-offset-4"
           href={DEFAULT_CASH_APP_PAY_URL}
           target="_blank"
           rel="noopener noreferrer"
         >
-          $toprankinherbsnoils
+          ($toprankinherbsnoils)
         </a>
-        ). Use the payment note for your product name if asked. Shipping timelines and return
-        questions are confirmed by our team by email or receipt details from Cash App.
+        . Use the payment note for your product name if prompted. Fulfillment timelines and returns
+        are confirmed by email or according to Cash App receipt details.
       </>
     ),
   },
