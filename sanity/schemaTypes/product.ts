@@ -1,11 +1,16 @@
 import { defineField, defineType } from "sanity";
 
-import { DEFAULT_CASH_APP_PAY_URL } from "../../src/lib/default-cash-app";
+import { CashAppPayUrlInput } from "../components/CashAppPayUrlInput";
+import { DEFAULT_CASH_APP_PAY_URL } from "../constants";
 
 export default defineType({
   name: "product",
   title: "Product",
   type: "document",
+  /** Ensures Cash App URL is set when editors create *new* products. */
+  initialValue: () => ({
+    cashAppPayUrl: DEFAULT_CASH_APP_PAY_URL,
+  }),
   fields: [
     defineField({
       name: "slug",
@@ -42,10 +47,27 @@ export default defineType({
       name: "cashAppPayUrl",
       title: "Cash App pay link",
       description:
-        "Official Cash for Business or $Cashtag pay URL (HTTPS). New products auto-fill below; override only when a SKU uses a different link.",
-      type: "url",
+        "Default is your storefront profile (`$toprankinherbsnoils`). Override only when a SKU needs another pay link.",
+      type: "string",
       initialValue: DEFAULT_CASH_APP_PAY_URL,
-      validation: (Rule) => Rule.required().uri({ scheme: ["https"] }),
+      components: {
+        input: CashAppPayUrlInput,
+      },
+      validation: (Rule) =>
+        Rule.required().custom((val) => {
+          if (!val || typeof val !== "string" || val.trim() === "") {
+            return "Required";
+          }
+          try {
+            const parsed = new URL(val);
+            if (parsed.protocol !== "https:") {
+              return "Must be an https:// URL";
+            }
+          } catch {
+            return "Enter a valid URL";
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "image",

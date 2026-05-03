@@ -3,7 +3,7 @@
 Modern Vercel-ready storefront/landing page for **Top Rankin' Herbs-n-Oils** (Jamaican/Rastafarian-inspired theme) with:
 
 - **Sanity CMS** at `/studio` — products, featured-drop order, urgency banner (project `swis517n`)
-- **Cash App only** — each product has a **Cash App pay URL**. Canonical fallback: **`https://cash.app/$toprankinherbsnoils`** (defined once in [`src/lib/default-cash-app.ts`](src/lib/default-cash-app.ts); matches the live Cash App **`$Cashtag`**). Override per SKU in Sanity; if Studio still has the old typo `…herbsandoils`, replace it everywhere with this URL.
+- **Cash App only** — each product has a **Cash App pay URL**. Canonical value: **`https://cash.app/$toprankinherbsnoils`**, defined in [`sanity/constants.ts`](sanity/constants.ts) (re-exported for the storefront as [`src/lib/default-cash-app.ts`](src/lib/default-cash-app.ts)). Studio auto-fills empty products and drafts via schema + a small input wrapper.
 - **Grok (xAI) chat** at `POST /api/chat`
 - **xAI Text-to-Speech** at `POST /api/tts` (bot speaks responses)
 
@@ -55,8 +55,8 @@ Security: if you ever paste an API key into chat/logs, treat it as compromised a
 ## Editing products
 
 1. **Preferred:** open **Sanity Studio** (`/studio`), edit **Products** and **Site settings** (featured order, countdown).
-2. **New products:** the **Cash App pay link** field is **pre-filled** with `DEFAULT_CASH_APP_PAY_URL` from code—override only when a product needs a different pay URL.
-3. **Fallback:** when CMS has no featured list yet, the site uses `src/content/products.ts` (all fallback products reuse **`DEFAULT_CASH_APP_PAY_URL`** from `src/lib/default-cash-app.ts`). Per-product overrides still use Sanity **`cashAppPayUrl`** — must match your real **https** Cash App link (`$toprankinherbsnoils`).
+2. **New products:** the **Cash App pay link** defaults from [`sanity/constants.ts`](sanity/constants.ts) and is **written into empty fields** when you open a product in Studio (covers old drafts). Override only when a SKU needs a different link.
+3. **Fallback:** when CMS has no featured list yet, the site uses `src/content/products.ts` (values still come from the same constant via `default-cash-app.ts`).
 
 ## Schema deploy (Sanity)
 
