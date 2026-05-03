@@ -371,14 +371,23 @@ export default function LearnPage() {
                 toprankin.herbsnoils@gmail.com
               </a>
               {" · "}
-              Flyers list{" "}
               <a
                 className="text-foreground underline underline-offset-4"
-                href="https://toprankinherbs.com"
-                rel="noopener noreferrer"
+                href={siteUrl}
               >
-                TopRankinHerbs.com
+                {new URL(siteUrl).hostname}
               </a>
+              {" · "}
+              <span className="text-muted-foreground/90">
+                Some print lists{" "}
+                <a
+                  className="text-foreground underline underline-offset-4"
+                  href="https://toprankinherbs.com"
+                  rel="noopener noreferrer"
+                >
+                  TopRankinHerbs.com
+                </a>
+              </span>
               {" · "}
               <Link href="/#drops" className="text-foreground underline underline-offset-4">
                 Shop featured drops
