@@ -1,5 +1,7 @@
 import { defineField, defineType } from "sanity";
 
+import { DEFAULT_CASH_APP_PAY_URL } from "../../src/lib/default-cash-app";
+
 export default defineType({
   name: "product",
   title: "Product",
@@ -40,8 +42,9 @@ export default defineType({
       name: "cashAppPayUrl",
       title: "Cash App pay link",
       description:
-        "Official Cash for Business or $Cashtag pay URL (HTTPS). Storefront checkout only — use the exact link from Cash App (Profile / Request → share). Example: https://cash.app/$toprankinherbsnoils ($toprankinherbsnoils, not “herbsandoils”).",
+        "Official Cash for Business or $Cashtag pay URL (HTTPS). New products auto-fill below; override only when a SKU uses a different link.",
       type: "url",
+      initialValue: DEFAULT_CASH_APP_PAY_URL,
       validation: (Rule) => Rule.required().uri({ scheme: ["https"] }),
     }),
     defineField({

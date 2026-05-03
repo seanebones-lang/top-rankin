@@ -38,6 +38,7 @@ Create a `.env.local` (or set in Vercel → Project → Settings → Environment
 **Sanity (webhook, optional but recommended)**
 
 - **`SANITY_REVALIDATE_SECRET`**: shared secret for `POST /api/revalidate-sanity` (create a GROQ webhook in Sanity Manage → API → Webhooks targeting that URL with the same secret).
+- Without the webhook, the homepage Sanity cache can lag up to ~**30 seconds** after you publish (`unstable_cache` in `src/lib/sanity/loadHome.ts`). With the webhook, publishes **clear the cache immediately** (`revalidateTag("sanity:home")`).
 
 **Site**
 
@@ -54,7 +55,8 @@ Security: if you ever paste an API key into chat/logs, treat it as compromised a
 ## Editing products
 
 1. **Preferred:** open **Sanity Studio** (`/studio`), edit **Products** and **Site settings** (featured order, countdown).
-2. **Fallback:** when CMS has no featured list yet, the site uses `src/content/products.ts` (all fallback products reuse **`DEFAULT_CASH_APP_PAY_URL`** from `src/lib/default-cash-app.ts`). Per-product overrides still use Sanity **`cashAppPayUrl`** — must match your real **https** Cash App link (`$toprankinherbsnoils`).
+2. **New products:** the **Cash App pay link** field is **pre-filled** with `DEFAULT_CASH_APP_PAY_URL` from code—override only when a product needs a different pay URL.
+3. **Fallback:** when CMS has no featured list yet, the site uses `src/content/products.ts` (all fallback products reuse **`DEFAULT_CASH_APP_PAY_URL`** from `src/lib/default-cash-app.ts`). Per-product overrides still use Sanity **`cashAppPayUrl`** — must match your real **https** Cash App link (`$toprankinherbsnoils`).
 
 ## Schema deploy (Sanity)
 
