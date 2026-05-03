@@ -40,7 +40,7 @@ export default defineType({
       name: "cashAppPayUrl",
       title: "Cash App pay link",
       description:
-        "Official Cash for Business or $Cashtag pay URL (HTTPS). This is the storefront’s only checkout.",
+        "Official Cash for Business or $Cashtag pay URL (HTTPS). Storefront checkout only — use the exact link from Cash App (Profile / Request → share). Example: https://cash.app/$toprankinherbsnoils ($toprankinherbsnoils, not “herbsandoils”).",
       type: "url",
       validation: (Rule) => Rule.required().uri({ scheme: ["https"] }),
     }),

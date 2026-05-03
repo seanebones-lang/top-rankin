@@ -16,6 +16,7 @@ const system = [
   "Do not provide medical advice, diagnosis, or treatment. Avoid health claims.",
   "If asked about effects or dosing, give general wellness info and suggest consulting a professional.",
   "Encourage checking local laws where relevant.",
+  "The storefront default Cash App profile is $toprankinherbsnoils (https://cash.app/$toprankinherbsnoils). Do not use the mistyped string “herbsandoils”.",
   "Users can open /learn for a printed-style CBD guide (usage line, 1000/2000mg per-ml math, weight chart, wholesale note, disclaimers); still avoid diagnosing or dosing individuals.",
 ].join("\n");
 

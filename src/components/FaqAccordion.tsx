@@ -9,6 +9,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { DEFAULT_CASH_APP_PAY_URL } from "@/lib/default-cash-app";
 
 const FAQ_ITEMS: { q: string; a: ReactNode }[] = [
   {
@@ -33,7 +34,21 @@ const FAQ_ITEMS: { q: string; a: ReactNode }[] = [
   },
   {
     q: "Shipping and returns",
-    a: "Checkout is completed in Cash App. Use the payment note for your product name if asked. Shipping timelines and return questions are confirmed by our team by email or receipt details from Cash App.",
+    a: (
+      <>
+        Checkout is completed in Cash App. Pay from each product&apos;s button (links go to{" "}
+        <a
+          className="font-medium text-foreground underline underline-offset-4"
+          href={DEFAULT_CASH_APP_PAY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          $toprankinherbsnoils
+        </a>
+        ). Use the payment note for your product name if asked. Shipping timelines and return
+        questions are confirmed by our team by email or receipt details from Cash App.
+      </>
+    ),
   },
   {
     q: "How often do you release new drops?",

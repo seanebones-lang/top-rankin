@@ -17,6 +17,7 @@ import { HeaderNav } from "@/components/HeaderNav";
 import { TestimonialsCarousel } from "@/components/TestimonialsCarousel";
 import { UrgencyBanner } from "@/components/UrgencyBanner";
 import { resolveHomeProducts, resolveUrgencyBanner } from "@/lib/sanity/loadHome";
+import { DEFAULT_CASH_APP_PAY_URL } from "@/lib/default-cash-app";
 
 export default async function Home() {
   const products = await resolveHomeProducts();
@@ -190,7 +191,16 @@ export default async function Home() {
               </div>
               <p className="mt-3 text-sm leading-6 text-muted-foreground">
                 Checkout happens in Cash App—simple steps and easy to finish on
-                your phone.
+                your phone. Business profile{" "}
+                <a
+                  className="text-foreground underline underline-offset-4"
+                  href={DEFAULT_CASH_APP_PAY_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  $toprankinherbsnoils
+                </a>
+                ; each Pay button opens the linked checkout for that product.
               </p>
             </div>
           </div>
