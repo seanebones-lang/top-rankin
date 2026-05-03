@@ -49,6 +49,7 @@ Create a `.env.local` (or set in Vercel → Project → Settings → Environment
 
 - **`XAI_API_KEY`**: required (server-only). Used by both `/api/chat` and `/api/tts`.
 - **`REDIS_URL`**: required for the email list (`/api/subscribe`). Use the full connection string Redis gives you (same as `redis-cli -u`). Example shape: `redis://default:PASSWORD@HOST:PORT` or `rediss://...` if TLS is required.
+- **Optional — copy each signup to your Gmail:** set **`RESEND_API_KEY`** from [Resend](https://resend.com). Each signup still saves to Redis **and** emails **`SIGNUP_NOTIFICATION_EMAIL`** (defaults to **`toprankin.herbsnoils@gmail.com`**). Set **`RESEND_FROM`** to a sender on your **verified domain** for production (e.g. `List <noreply@top.mothership-ai.com>`). Until then, Resend may only allow **`onboarding@resend.dev`** for testing — check Resend docs for delivering to real inboxes.
 
 Security: if you ever paste an API key into chat/logs, treat it as compromised and **revoke it** in the xAI console. **Never post Redis passwords publicly** — rotate them in Redis Cloud if they were exposed.
 
@@ -84,4 +85,4 @@ Notes:
 
 - Chat widget: `src/app/layout.tsx` → `src/components/ChatWidget.tsx`.
 - SEO: `/sitemap.xml`, `/robots.txt`, `/opengraph-image`, **`/learn`** (CBD pamphlet-style guide).
-- Email list: homepage `#list` → `POST /api/subscribe`.
+- Email list: homepage `#list` → `POST /api/subscribe` (Redis + optional Resend ping to **`toprankin.herbsnoils@gmail.com`** via `RESEND_API_KEY`).

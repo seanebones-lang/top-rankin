@@ -2,6 +2,8 @@ import { z } from "zod";
 import { track } from "@vercel/analytics/server";
 import { createClient } from "redis";
 
+import { notifyOwnerOfSignup } from "@/lib/signup-notification";
+
 /** TCP Redis (Redis Cloud, Vercel `REDIS_URL`, etc.). Not compatible with Edge. */
 export const runtime = "nodejs";
 
@@ -75,6 +77,12 @@ export async function POST(req: Request) {
     });
 
     await track("EmailSignup", { added: String(newlyAdded) });
+
+    try {
+      await notifyOwnerOfSignup({ subscriberEmail: email, subscriberName: name });
+    } catch (err) {
+      console.error("[subscribe] Owner notification failed:", err);
+    }
 
     return Response.json({ ok: true, added: newlyAdded });
   } catch (err) {
