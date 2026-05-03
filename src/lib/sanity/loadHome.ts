@@ -63,8 +63,8 @@ async function fetchHomeRaw(): Promise<SanityHomeDocument | null> {
 export const getHomePageData = unstable_cache(
   async () => fetchHomeRaw(),
   ["sanity-home-page"],
-  // Faster refresh when no webhook runs; Sanity webhook clears `sanity:home` instantly.
-  { tags: ["sanity:home"], revalidate: 30 },
+  // Webhook clears `sanity:home` instantly; without webhook edits can lag briefly.
+  { tags: ["sanity:home"], revalidate: 10 },
 );
 
 export async function resolveHomeProducts(): Promise<Product[]> {
