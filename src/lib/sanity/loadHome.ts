@@ -2,6 +2,7 @@ import { unstable_cache } from "next/cache";
 
 import type { Product } from "@/content/products";
 import { featuredProducts as fallbackFeatured } from "@/content/products";
+import { DEFAULT_CASH_APP_PAY_URL } from "@/lib/default-cash-app";
 
 import { sanityClient } from "./client";
 import { sanityProductImageUrl } from "./image";
@@ -32,14 +33,18 @@ function mapFeatured(
   for (const row of featured) {
     const slug = row.slug?.trim();
     const name = row.name?.trim();
-    const url = row.cashAppPayUrl?.trim();
-    if (!slug || !name || !url) continue;
+    if (!slug || !name) continue;
+    const trimmedUrl = row.cashAppPayUrl?.trim();
+    const cashAppPayUrl =
+      trimmedUrl && trimmedUrl.length > 0
+        ? trimmedUrl
+        : DEFAULT_CASH_APP_PAY_URL;
     out.push({
       slug,
       name,
       note: row.note ?? "",
       priceLabel: row.priceLabel ?? "",
-      cashAppPayUrl: url,
+      cashAppPayUrl,
       imageUrl: sanityProductImageUrl(row.image),
       details: row.details ?? undefined,
     });

@@ -3,7 +3,7 @@
 Modern Vercel-ready storefront/landing page for **Top Rankin' Herbs-n-Oils** (Jamaican/Rastafarian-inspired theme) with:
 
 - **Sanity CMS** at `/studio` — products, featured-drop order, urgency banner (project `swis517n`)
-- **Cash App only** — each product has a **Cash App pay URL**. Canonical value: **`https://cash.app/$toprankinherbsnoils`**, defined in [`sanity/constants.ts`](sanity/constants.ts) (re-exported for the storefront as [`src/lib/default-cash-app.ts`](src/lib/default-cash-app.ts)). Studio auto-fills empty products and drafts via schema + a small input wrapper.
+- **Cash App only** — each product has a **Cash App pay URL**. Canonical value: **`https://cash.app/$toprankinherbsnoils`**, defined in [`sanity/constants.ts`](sanity/constants.ts) (re-exported for the storefront as [`src/lib/default-cash-app.ts`](src/lib/default-cash-app.ts)). Studio pre-fills new products via schema `initialValue`; the site falls back to the same URL when a featured product has no stored link.
 - **Grok (xAI) chat** at `POST /api/chat`
 - **xAI Text-to-Speech** at `POST /api/tts` (bot speaks responses)
 
@@ -55,7 +55,7 @@ Security: if you ever paste an API key into chat/logs, treat it as compromised a
 ## Editing products
 
 1. **Preferred:** open **Sanity Studio** (`/studio`), edit **Products** and **Site settings** (featured order, countdown).
-2. **New products:** the **Cash App pay link** defaults from [`sanity/constants.ts`](sanity/constants.ts) and is **written into empty fields** when you open a product in Studio (covers old drafts). Override only when a SKU needs a different link.
+2. **Cash App pay link:** new products pick up defaults from Studio schema (`sanity/constants.ts`). Old rows missing a URL still use that same default link on the **storefront**; fill the field in Studio so validation and publishing stay clean.
 3. **Fallback:** when CMS has no featured list yet, the site uses `src/content/products.ts` (values still come from the same constant via `default-cash-app.ts`).
 
 ## Schema deploy (Sanity)

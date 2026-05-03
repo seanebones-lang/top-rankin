@@ -1,6 +1,5 @@
 import { defineField, defineType } from "sanity";
 
-import { CashAppPayUrlInput } from "../components/CashAppPayUrlInput";
 import { DEFAULT_CASH_APP_PAY_URL } from "../constants";
 
 export default defineType({
@@ -50,9 +49,6 @@ export default defineType({
         "Default is your storefront profile (`$toprankinherbsnoils`). Override only when a SKU needs another pay link.",
       type: "string",
       initialValue: DEFAULT_CASH_APP_PAY_URL,
-      components: {
-        input: CashAppPayUrlInput,
-      },
       validation: (Rule) =>
         Rule.required().custom((val) => {
           if (!val || typeof val !== "string" || val.trim() === "") {
