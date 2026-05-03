@@ -3,7 +3,7 @@
 Modern Vercel-ready storefront/landing page for **Top Rankin' Herbs-n-Oils** (Jamaican/Rastafarian-inspired theme) with:
 
 - **Sanity CMS** at `/studio` — products, featured-drop order, urgency banner (project `swis517n`)
-- **Cash App only** — each product has a **Cash App pay URL** (fallback seed uses [`$toprankinherbsandoils`](https://cash.app/$toprankinherbsandoils); override per SKU in Sanity as needed)
+- **Cash App only** — each product has a **Cash App pay URL** (fallback seed uses [`$toprankinherbsnoils`](https://cash.app/$toprankinherbsnoils); override per SKU in Sanity as needed)
 - **Grok (xAI) chat** at `POST /api/chat`
 - **xAI Text-to-Speech** at `POST /api/tts` (bot speaks responses)
 

@@ -19,7 +19,7 @@ export const featuredProducts: Product[] = [
     name: "Island Calm Gummies",
     note: "Sweet + steady • evening wind-down",
     priceLabel: "$29",
-    cashAppPayUrl: "https://cash.app/$toprankinherbsandoils",
+    cashAppPayUrl: "https://cash.app/$toprankinherbsnoils",
     details: {
       subtitle: "A smooth nightly vibe, one chew at a time.",
       bullets: [
@@ -36,7 +36,7 @@ export const featuredProducts: Product[] = [
     name: "Herb & Honey Tincture",
     note: "Smooth dropper • everyday balance",
     priceLabel: "$39",
-    cashAppPayUrl: "https://cash.app/$toprankinherbsandoils",
+    cashAppPayUrl: "https://cash.app/$toprankinherbsnoils",
     details: {
       subtitle: "Everyday balance with a clean finish.",
       bullets: [
@@ -53,7 +53,7 @@ export const featuredProducts: Product[] = [
     name: "Top Rankin’ Relief Balm",
     note: "Cooling comfort • post-work recovery",
     priceLabel: "$24",
-    cashAppPayUrl: "https://cash.app/$toprankinherbsandoils",
+    cashAppPayUrl: "https://cash.app/$toprankinherbsnoils",
     details: {
       subtitle: "Targeted comfort after training or long days.",
       bullets: [
