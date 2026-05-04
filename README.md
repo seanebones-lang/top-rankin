@@ -35,6 +35,10 @@ Create a `.env.local` (or set in Vercel → Project → Settings → Environment
 - **`NEXT_PUBLIC_SANITY_PROJECT_ID`**: `swis517n` (default in code if unset).
 - **`NEXT_PUBLIC_SANITY_DATASET`**: usually `production`.
 
+**Sanity (CI / Vercel — schema stays in sync with git)**
+
+- **`SANITY_AUTH_TOKEN`**: create an API token on **[project swis517n → API](https://www.sanity.io/manage/project/swis517n/api)** with **Administrator** (or **Developer** if it includes Studio/schema deploy — the error `sanity.project/deployStudio` means the token role is too weak). Add it in **Vercel → Environment Variables**. On Vercel, **`pnpm build`** runs **`sanity schema deploy`** first (Vercel sets `VERCEL=1`). **Local `pnpm build` does not** run schema deploy when only this token is set (avoids breaking builds on bad shell tokens); push the schema with **`pnpm sanity:schema:deploy`**, or force during build: **`SANITY_SCHEMA_DEPLOY_ON_BUILD=1 pnpm build`**. Skip on Vercel: **`SANITY_SKIP_SCHEMA_DEPLOY=1`**.
+
 **Sanity (webhook, optional but recommended)**
 
 - **`SANITY_REVALIDATE_SECRET`**: shared secret for `POST /api/revalidate-sanity` (create a GROQ webhook in Sanity Manage → API → Webhooks targeting that URL with the same secret).
@@ -61,7 +65,9 @@ Security: if you ever paste an API key into chat/logs, treat it as compromised a
 
 ## Schema deploy (Sanity)
 
-After changing files under `sanity/`, push the schema to your dataset:
+On **Vercel**, schema deploy runs automatically at build time when **`SANITY_AUTH_TOKEN`** is set.
+
+Locally, after changing files under `sanity/`:
 
 ```bash
 pnpm sanity:schema:deploy
@@ -77,12 +83,12 @@ pnpm start
 ## Deploy on Vercel
 
 1. Import this repo into Vercel.
-2. Set `XAI_API_KEY`, Redis vars, `NEXT_PUBLIC_SANITY_*`, and `SANITY_REVALIDATE_SECRET` as needed.
+2. Set `XAI_API_KEY`, Redis vars, `NEXT_PUBLIC_SANITY_*`, `SANITY_AUTH_TOKEN` (auto schema deploy on build), and `SANITY_REVALIDATE_SECRET` as needed.
 3. Add a Sanity webhook to `https://<your-domain>/api/revalidate-sanity` with the same secret.
 4. Deploy.
 
 Notes:
 
-- Chat widget: `src/app/layout.tsx` → `src/components/ChatWidget.tsx`.
+- Chat widget: `(storefront)` / `(legal)` layouts → `SiteGlobalOverlays` → `ChatWidget.tsx` (not mounted under `/studio`).
 - SEO: `/sitemap.xml`, `/robots.txt`, `/opengraph-image`, **`/learn`** (CBD pamphlet-style guide).
 - Email list: homepage `#list` → `POST /api/subscribe` (Redis + optional Resend ping to **`toprankin.herbsnoils@gmail.com`** via `RESEND_API_KEY`).

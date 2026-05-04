@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/sanity-schema-deploy-ci.cjs && next build",
     "start": "next start",
     "lint": "eslint",
     "sanity:schema:deploy": "sanity schema deploy"
